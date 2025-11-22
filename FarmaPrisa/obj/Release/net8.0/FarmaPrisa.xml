@@ -1,0 +1,736 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FarmaPrisa</name>
+    </assembly>
+    <members>
+        <member name="M:FarmaPrisa.Controllers.AdminController.GetUsuarios">
+            <summary>
+            Devuelve el listado completo de todos los usuarios registrados (activos e inactivos). Solo Administradores.
+            </summary>
+            <remarks>
+            Este endpoint ignora cualquier filtro global de seguridad para permitir la gestión completa.
+            Devuelve los roles de cada usuario.
+            </remarks>
+            <response code="200">Listado de todos los usuarios (incluye estado e información de roles).</response>
+            <response code="401">No autorizado (falta token).</response>
+            <response code="403">Acceso denegado (el usuario no tiene el rol 'administrador').</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.ToggleUserStatus(System.Int32)">
+            <summary>
+            Alterna (Bloquea/Desbloquea) el acceso de un usuario al sistema. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint invierte el estado actual de 'EstaActivo'.
+            </remarks>
+            <param name="id">ID del usuario a modificar.</param>
+            <response code="200">Alternancia de estado exitosa. Devuelve un ApiResultDto.</response>
+            <response code="404">Usuario no encontrado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.GetPedidosAdmin">
+            <summary>
+            Muestra la lista de todos los pedidos registrados en el sistema con un resumen de su estado. Solo Administradores.
+            </summary>
+            <remarks>
+            Este endpoint es utilizado por el dashboard para la gestión de órdenes.
+            Incluye el nombre del cliente, el estado, el tipo de entrega y el total.
+            </remarks>
+            <response code="200">Listado de Pedidos con información resumida.</response>
+            <response code="403">Acceso denegado (el usuario no tiene el rol 'administrador').</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.GetPedidoDetalle(System.Int32)">
+            <summary>
+            Muestra el detalle completo de un pedido específico, incluyendo artículos, costos, cliente y estado de pago. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este es el endpoint utilizado por la vista de detalle de la orden.
+            Carga datos complejos como detalles_pedido, cliente, dirección y transacciones.
+            </remarks>
+            <param name="id">ID del pedido a consultar.</param>
+            <response code="200">Devuelve el objeto PedidoDetalleDto completo.</response>
+            <response code="404">Pedido no encontrado.</response>
+            <response code="403">Acceso denegado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.GetRoles">
+            <summary>
+            Sube múltiples imágenes para la galería de un producto existente. Solo Administradores.
+            </summary>
+            <param name="id">ID del producto al que se añadirán las imágenes.</param>
+            <param name="archivos">Colección de archivos (IFormFile) a subir.</param>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.UpdateUserRoles(System.Int32,FarmaPrisa.Models.Dtos.Usuario.UserRolesUpdateDto)">
+            <summary>
+            Sincroniza la lista completa de roles asignados a un usuario. Solo Administradores.
+            </summary>
+            <remarks>
+            Este endpoint requiere la lista *completa* de IDs de roles que el usuario debe tener. 
+            Los roles existentes que no estén en la lista enviada serán eliminados.
+            Requiere el rol 'administrador'.
+            </remarks>
+            <param name="id">ID del usuario cuyos roles serán actualizados.</param>
+            <param name="dto">Objeto con la lista de IDs de roles que el usuario debe tener.</param>
+            <response code="200">Sincronización de roles exitosa.</response>
+            <response code="400">Datos de entrada inválidos (ej: RolId inexistente).</response>
+            <response code="403">Acceso denegado.</response>
+            <response code="404">Usuario no encontrado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.CreateAdminUser(FarmaPrisa.Models.Dtos.Usuario.UsuarioAdminCreateDto)">
+            <summary>
+            Crea un nuevo usuario y le asigna roles específicos (ej: Entregador o Cajero). Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint permite registrar empleados o administradores directamente.
+            </remarks>
+            <param name="dto">Datos del nuevo usuario y lista de Roles a asignar (por nombre).</param>
+            <response code="201">Usuario creado y roles asignados exitosamente. Devuelve el ID del nuevo usuario.</response>
+            <response code="400">Datos de entrada inválidos (ej. Correo ya existe).</response>
+            <response code="403">Acceso denegado.</response>
+            <response code="500">Error interno (ej. Rol no encontrado o fallo en la BD).</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AdminController.GetDashboardData">
+            <summary>
+            Devuelve todos los datos estadísticos y de gestión necesarios para el Dashboard del Administrador.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Consolida KPIs, gráficos de ventas y alertas de inventario.
+            </remarks>
+            <response code="200">Objeto DashboardDataDto con todos los indicadores.</response>
+            <response code="403">Acceso denegado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AuthController.Register(FarmaPrisa.Models.Dtos.UserRegisterDto)">
+            <summary>
+            Crea una nueva cuenta de cliente en la plataforma.
+            </summary>
+            <remarks>
+            Este endpoint recibe los datos del nuevo usuario, verifica que el correo no esté en uso,
+            hashea la contraseña de forma segura y finalmente almacena el registro en la base de datos.
+            Al registrarse, al usuario se le asigna automáticamente el rol de 'Cliente'.
+            </remarks>
+            <param name="request">Objeto que contiene la información del usuario: NombreCompleto, Email, Password y PaisId.</param>
+            <response code="200">Registro exitoso. Devuelve un mensaje de confirmación.</response>
+            <response code="400">Error en la solicitud. Ocurre si el correo ya está registrado o los datos son inválidos.</response>
+            <response code="500">Error interno del servidor. Ocurre si el rol 'Cliente' no se encuentra en la base de datos.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.AuthController.Login(FarmaPrisa.Models.Dtos.UserLoginDto)">
+            <summary>
+            Inicia sesión para un usuario existente y genera un token de acceso.
+            </summary>
+            <remarks>
+            Este endpoint valida las credenciales del usuario (email y contraseña).
+            Utiliza BCrypt para comparar de forma segura la contraseña proporcionada con el hash almacenado.
+            Si la autenticación es exitosa, devuelve un token JWT que debe ser utilizado en la cabecera 'Authorization'
+            de las siguientes peticiones a endpoints protegidos (Ej: 'Bearer {token}').
+            </remarks>
+            <param name="request">Objeto que contiene el Email y la Contraseña del usuario.</param>
+            <response code="200">Autenticación exitosa. Devuelve un objeto que contiene el token JWT.</response>
+            <response code="401">Credenciales incorrectas. Ocurre si el email no existe o la contraseña es errónea.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.BrandsController.GetAll">
+            <summary>
+            Devuelve Listado De Marcas.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.BrandsController.GetById(System.Int32)">
+            <summary>
+            Devuelve Listado De Marcas Por Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.BrandsController.AddBrand(FarmaPrisa.Models.Dtos.Brands.GenericBrandDto)">
+            <summary>
+            Crear Nueva Marca.
+            Solo Administradores.
+            </summary>
+            <param name="brandDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.BrandsController.UpdateBrand(FarmaPrisa.Models.Dtos.Brands.GenericBrandDto)">
+            <summary>
+            Actualizar Marcas.
+            Solo Administradores.
+            </summary>
+            <param name="brandDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.BrandsController.DeleteBrand(System.Int32)">
+            <summary>
+            Desactivar Marcas.
+            Solo Administradores.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.CategoriasController.CreateCategoria(FarmaPrisa.Models.Dtos.Categoria.CategoriaCreateUpdateDto)">
+            <summary>
+            Crea una nueva categoría o subcategoría en el catálogo. Solo accesible para Administradores.
+            </summary>
+            <remarks>
+            Utiliza 'CategoriaPadreId' para crear una subcategoría vinculada a una categoría principal existente.
+            Requiere el rol 'administrador'.
+            </remarks>
+            <param name="dto">Datos de la nueva categoría (Nombre, Descripción, CategoriaPadreId opcional).</param>
+            <response code="201">Categoría creada exitosamente. Devuelve el ID de la nueva categoría.</response>
+            <response code="400">Datos de entrada inválidos.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.CategoriasController.GetCategorias">
+            <summary>
+            Obtiene el catálogo completo de categorías con su estructura jerárquica (padre/hijo).
+            </summary>
+            <remarks>
+            Este endpoint es utilizado por el panel de administración para mostrar el árbol de navegación.
+            No está protegido, ya que el catálogo de categorías es público.
+            </remarks>
+            <response code="200">Devuelve un listado de categorías raíz con sus subcategorías anidadas.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.CategoriasController.GetDetalles(System.Int32)">
+            <summary>4
+            endpoint de filtro de categorias,marcas y  productos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.CategoriasController.UpdateCategoria(System.Int32,FarmaPrisa.Models.Dtos.Categoria.CategoriaCreateUpdateDto)">
+            <summary>
+            Actualiza el nombre, descripción y/o jerarquía de una categoría existente. Solo Administradores.
+            </summary>
+            <remarks>
+            Este endpoint permite renombrar o mover una categoría a otra categoría padre.
+            Requiere el rol 'administrador'.
+            </remarks>
+            <param name="id">ID de la categoría a actualizar.</param>
+            <param name="dto">Datos de la categoría a actualizar (se actualiza solo lo que se envía).</param>
+            <response code="200">Actualización exitosa.</response>
+            <response code="400">Datos de entrada inválidos (ej. ID de padre inexistente).</response>
+            <response code="401">No autorizado.</response>
+            <response code="404">Categoría no encontrada.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.HealthCheckController.CheckDbConnection">
+            <summary>
+            Realiza una prueba de conexión a la base de datos MariaDB.
+            </summary>
+            <remarks>
+            Endpoint de diagnóstico ("Health Check") para verificar que la API puede establecer
+            una conexión exitosa con la base de datos. Es útil para monitorear el estado del servicio.
+            </remarks>
+            <response code="200">Conexión exitosa. El servicio está operativo.</response>
+            <response code="400">La conexión se intentó pero falló sin generar una excepción crítica.</response>
+            <response code="500">Error interno del servidor. La conexión falló debido a una excepción (ej. credenciales incorrectas, firewall).</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.GetAll">
+            <summary>
+            Devuelve Listado De Todos Los Productos.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.GetById(System.Int32)">
+            <summary>
+            Devuelve Listado De Productos Por ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.Create(FarmaPrisa.Models.Dtos.Products.ProductDto)">
+            <summary>
+            Crear Nuevo Producto. Solo Administradores.
+            </summary>
+            <param name="productDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.Update(System.Int32,FarmaPrisa.Models.Dtos.Products.ProductDto)">
+            <summary>
+            Actualizar Productos. Solo Administradores.
+            </summary>
+            <param name="id"></param>
+            <param name="productDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.Delete(System.Int32)">
+            <summary>
+            Desactivar Productos. Solo Administradores.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.GetAllImages">
+            <summary>
+            Listar todos los productos con sus imagenes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.GetProductImages(System.Int32)">
+            <summary>
+            Listar Imagenes de productos, orden, esprincipal, url
+            se debe de especificar el id del producto.
+            </summary>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.UploadImages(System.Int32,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Nullable{System.Int32})">
+            <summary>
+            Subir múltiples imágenes para un producto. Solo Administradores.
+            Se guardara en wwwroot/images del proyecto de manera publica, asignar si es principal e igual opcional establecer si es principal.
+            </summary>
+            
+        </member>
+        <member name="M:FarmaPrisa.Controllers.PromocionController.CreatePromocion(FarmaPrisa.Models.Dtos.Promocion.PromocionCreateDto)">
+            <summary>
+            Crea una nueva promoción y asigna productos o categorías asociadas. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. La operación es transaccional.
+            El 'CodigoCupon' debe ser único.
+            </remarks>
+            <param name="dto">Datos de la promoción (descuento, fechas) y colecciones de IDs (ProductoIds, CategoriaIds).</param>
+            <response code="201">Promoción creada exitosamente.</response>
+            <response code="400">Datos de entrada inválidos (ej. Código de Cupón duplicado o falta de campos obligatorios).</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.PromocionController.GetPromociones">
+            <summary>
+            Devuelve el listado completo de todas las promociones activas, inactivas y futuras. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. El listado incluye el conteo de productos y categorías asociadas.
+            </remarks>
+            <response code="200">Listado de PromocionesAdminDto ordenadas por FechaFin.</response>
+            <response code="403">Acceso denegado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.PromocionController.GetPromocionDetalle(System.Int32)">
+            <summary>
+            Devuelve el detalle completo de una promoción, incluyendo los IDs de todos los productos y categorías asociados. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint se usa para precargar el formulario de edición de la promoción.
+            </remarks>
+            <param name="id">ID de la promoción a consultar.</param>
+            <response code="200">Devuelve el objeto PromocionDetalleDto completo.</response>
+            <response code="404">Promoción no encontrada.</response>
+            <response code="403">Acceso denegado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.PromocionController.UpdatePromocion(System.Int32,FarmaPrisa.Models.Dtos.Promocion.PromocionCreateDto)">
+            <summary>
+            Actualiza los datos principales de una promoción y sincroniza las listas de productos/categorías asociados. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Se utiliza una transacción para asegurar que la actualización de la promoción y las tablas pivote sean atómicas.
+            </remarks>
+            <param name="id">ID de la promoción a actualizar.</param>
+            <param name="dto">Datos actualizados de la promoción (sincroniza ProductoIds y CategoriaIds).</param>
+            <response code="200">Actualización exitosa.</response>
+            <response code="400">Error en la solicitud (ej. Código de Cupón duplicado).</response>
+            <response code="404">Promoción no encontrada.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.PromocionController.TogglePromocionStatus(System.Int32)">
+            <summary>
+            Alterna el estado de activación de una promoción (de activo a inactivo o viceversa). Solo Administradores.
+            </summary>
+            <remarks>
+            Este endpoint no requiere cuerpo de solicitud. Simplemente invierte el valor actual de 'EstaActiva'.
+            </remarks>
+            <param name="id">ID de la promoción a modificar.</param>
+            <response code="200">Cambio de estado exitoso.</response>
+            <response code="404">Promoción no encontrada.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProveedorController.CreateProveedor(FarmaPrisa.Models.Dtos.Proveedor.ProveedorCreateUpdateDto)">
+            <summary>
+            Registra un nuevo proveedor/laboratorio en el sistema. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint es necesario para crear nuevos productos.
+            </remarks>
+            <param name="dto">Datos del nuevo proveedor.</param>
+            <response code="201">Proveedor creado exitosamente. Devuelve el ID generado.</response>
+            <response code="400">Error en la solicitud (ej. Nombre ya existe).</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProveedorController.GetProveedores">
+            <summary>
+            Devuelve el listado completo de proveedores (marcas/laboratorios) para el Panel de Administración.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint se usa para poblar la tabla de gestión de proveedores.
+            </remarks>
+            <response code="200">Listado de proveedores (Id, Nombre, LogoUrl).</response>
+            <response code="403">Acceso denegado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProveedorController.UpdateProveedor(System.Int32,FarmaPrisa.Models.Dtos.Proveedor.ProveedorCreateUpdateDto)">
+            <summary>
+            Actualiza la información de un proveedor/laboratorio existente. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Se aplica validación de unicidad en Nombre, Email y Identificación Fiscal.
+            </remarks>
+            <param name="id">ID del proveedor a actualizar.</param>
+            <param name="dto">Datos del proveedor a actualizar.</param>
+            <response code="200">Actualización exitosa. Devuelve un mensaje de éxito.</response>
+            <response code="400">Datos de entrada inválidos (ej. Nombre, Email o RUC ya existe en otro registro).</response>
+            <response code="404">Proveedor no encontrado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProveedorController.ToggleProveedorStatus(System.Int32)">
+            <summary>
+            Alterna (Activa/Desactiva) el estado de un proveedor para mostrarlo u ocultarlo del catálogo. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint invierte el valor actual de 'EstaActivo' (Soft Delete).
+            </remarks>
+            <param name="id">ID del proveedor a modificar.</param>
+            <response code="200">Alternancia de estado exitosa. Devuelve un ApiResultDto con el nuevo estado.</response>
+            <response code="404">Proveedor no encontrado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.ProveedorController.GetProveedorDetalle(System.Int32)">
+            <summary>
+            Obtiene los detalles completos de un proveedor específico por su ID. Solo Administradores.
+            </summary>
+            <remarks>
+            Requiere el rol 'administrador'. Este endpoint se usa para cargar los datos en el formulario de edición (PUT).
+            </remarks>
+            <param name="id">ID del proveedor a consultar.</param>
+            <response code="200">Devuelve el objeto ProveedorAdminDto completo.</response>
+            <response code="404">Proveedor no encontrado.</response>
+            <response code="403">Acceso denegado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.UserController.GetUsuario(System.Int32)">
+            <summary>
+            Obtiene los datos de un usuario específico por su ID. (Uso administrativo).
+            </summary>
+            <remarks>
+            Endpoint protegido, destinado al panel de administración para ver el detalle de una cuenta de usuario.
+            La respuesta utiliza un DTO (UserDto) para no exponer datos sensibles como el hash de la contraseña.
+            </remarks>
+            <param name="id">El ID numérico del usuario que se desea consultar.</param>
+            <response code="200">Operación exitosa. Devuelve los datos del usuario solicitado.</response>
+            <response code="403">Acceso denegado. Si el usuario no tiene permisos de administrador.</response>
+            <response code="404">No encontrado. Si no existe un usuario con el ID proporcionado.</response>
+        </member>
+        <member name="M:FarmaPrisa.Controllers.UserController.UpdateUser(System.Int32,FarmaPrisa.Models.Dtos.UserUpdateDto)">
+            <summary>
+            Actualiza los datos de un usuario existente por su ID. (Uso administrativo).
+            </summary>
+            <remarks>
+            Endpoint protegido, destinado al panel de administración para modificar la información de un usuario.
+            Campos que se pueden actualizar: NombreCompleto, Telefono, EstaActivo, PuntosFidelidad, ProveedorId y PaisId.
+            El email y la contraseña no se modifican desde este endpoint.
+            </remarks>
+            <param name="id">El ID numérico del usuario que se va a actualizar.</param>
+            <param name="userUpdateDto">Objeto con los datos actualizados del usuario.</param>
+            <response code="204">Actualización exitosa. No devuelve contenido.</response>
+            <response code="400">Solicitud incorrecta. Si los datos enviados en el cuerpo no son válidos.</response>
+            <response code="403">Acceso denegado. Si el usuario no tiene permisos de administrador.</response>
+            <response code="404">No encontrado. Si no existe un usuario con el ID proporcionado.</response>
+        </member>
+        <member name="T:FarmaPrisa.Migrations.CreandoBaseDeDatos">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.CreandoBaseDeDatos.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.CreandoBaseDeDatos.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.CreandoBaseDeDatos.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.seagregatablacurrencycompany">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.seagregatablacurrencycompany.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.seagregatablacurrencycompany.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.seagregatablacurrencycompany.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.nuevosCambios">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevosCambios.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevosCambios.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevosCambios.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.nuevosCambios2">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevosCambios2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevosCambios2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nuevosCambios2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.nd2">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nd2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nd2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.nd2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="P:FarmaPrisa.Models.Dtos.Promocion.PromocionDetalleDto.ProductosAsociadosIds">
+            <summary>Lista de IDs de productos a los que aplica la promoción.</summary>
+        </member>
+        <member name="P:FarmaPrisa.Models.Dtos.Promocion.PromocionDetalleDto.CategoriasAsociadasIds">
+            <summary>Lista de IDs de categorías a las que aplica la promoción.</summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Dtos.UserUpdateDto">
+            <summary>
+            DTO con los campos que se pueden actualizar de un usuario.
+            </summary>
+        </member>
+        <member name="P:FarmaPrisa.Models.Dtos.Usuario.UserRolesUpdateDto.RolIds">
+            <summary>
+            Lista de IDs de los roles que el usuario debe tener. 
+            Esta lista reemplazará por completo los roles actuales del usuario.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Aseguradora">
+            <summary>
+            Tabla para gestionar las aseguradoras, contendrá la lista de todas las compañías de seguros con las que la farmacia tiene convenio
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.CarritoItem">
+            <summary>
+            Tabla para el carrito de las compras
+            A esta tabla se le hace un DELETE limpio cada que se hace una compra, porque son datos temporales y se usa como una mesa de trabajo donde el cliente coloca los productos y luego se deja limpio. Así se evita que se acumule basura y se hagan más lentas las consultas de los productos del carrito de compras por usuario
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Categoria">
+            <summary>
+            Para organizar productos. El campo &apos;categoria_padre_id&apos; nos permite crear subcategorías.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.DetallesPedido">
+            <summary>
+            Tabla de cruce para saber qué productos van en cada pedido.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Direccione">
+            <summary>
+            Tabla para que los usuarios guarden múltiples direcciones de envío.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.DivisionesGeografica">
+            <summary>
+            Tabla para las divisiones geográficas y referirnos a los continentes, países,  provincias, departamentos, ciudades, barrios, etc. según convenga
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.HorariosDomicilio">
+            <summary>
+            Tabla para gestión de horarios de los domicilio
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.HorariosSucursal">
+            <summary>
+            Tabla para los horarios de las sucursal
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.InventarioSucursal">
+            <summary>
+            Tabla para el inventario por sucursal
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.ItemsMedium">
+            <summary>
+            Para poder guardar los elementos de los archivos medias en las secciones
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.MetodosPagoUsuario">
+            <summary>
+            Tabla para la gestión de los métodos de pagos con
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.OpinionesProducto">
+            <summary>
+            Tabla de Opiniones y Valoraciones
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.OtpUsuario">
+            <summary>
+            Tabla para la gestión y validación de Códigos de Uso Único (OTP).
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.PaginasInformativa">
+            <summary>
+            Páginas con información estática, con esta tabla, el administrador podrá crear y editar fácilmente el contenido de estas páginas desde el panel de control.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Pedido">
+            <summary>
+            Tabla para guardar los pedidos de los clientes.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.ProductoSintoma">
+            <summary>
+            Tabla para conectar los productos con sus síntomas.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.PromocionCategoria">
+            <summary>
+            Tabla para aplicar una promoción a categorías enteras
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Promocione">
+            <summary>
+            Tabla principal para definir cada promoción
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.PromocionProducto">
+            <summary>
+            Tabla para aplicar una promoción a productos específicos
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Proveedore">
+            <summary>
+            Tabla para los proveedores o laboratorios.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.RecetasMedica">
+            <summary>
+            Tabla para que los usuarios suban sus recetas
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Role">
+            <summary>
+            Tabla para los roles
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.SeccionesMedium">
+            <summary>
+            Tabla para definir las ubicaciones o secciones de media en el sitio
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Sintoma">
+            <summary>
+            Tabla para almacenar todos los posibles síntomas.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Sucursale">
+            <summary>
+            Tabla para gestionar las sucursales
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.TasasImpuesto">
+            <summary>
+            Tabla para la gestión de los impuestos según el país
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Transaccione">
+            <summary>
+            Tabla para guardar un registro del pago
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.Usuario">
+            <summary>
+            Tabla para los usuarios.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.UsuarioAseguradora">
+            <summary>
+            Tabla para Vincular Usuarios con Aseguradoras  conecta a cada usuario con su respectiva aseguradora y guarda su número de póliza. Esto permite que un usuario pueda tener pólizas con una o más aseguradoras.
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.UsuarioRole">
+            <summary>
+            Tabla para la relación de los Usuarios con los Roles
+            </summary>
+        </member>
+        <member name="T:FarmaPrisa.Models.Entities.ZonasDomicilio">
+            <summary>
+            Tabla para gestión de las zonas de domicilio
+            </summary>
+        </member>
+        <member name="M:CurrencyController.GetAll">
+            <summary>
+            Devuelve listado de monedas.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CurrencyController.GetById(System.Int32)">
+            <summary>
+            Devuelve Listado De Monedas Por Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CurrencyController.Create(FarmaPrisa.Models.Dtos.Currency.CreateCurrencyDto)">
+            <summary>
+            Crea Monedas. Solo Administradores.
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CurrencyController.Update(System.Int32,FarmaPrisa.Models.Dtos.Currency.UpdateCurrencyDto)">
+            <summary>
+            Actualiza Monedas.Solo Administradores.
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CurrencyController.Delete(System.Int32)">
+            <summary>
+            Desactiva Monedas. Solo Administradores.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GeografiaController.GetPaises">
+            <summary>
+            Recupera la lista de países disponibles en la plataforma.
+            </summary>
+            <remarks>
+            Este endpoint consulta la tabla 'divisiones_geograficas' para obtener los registros de tipo 'País'.
+            Se utiliza principalmente para poblar los selectores en los formularios de registro de usuarios y direcciones.
+            Devuelve una lista simplificada (DTO) con el Id y el Nombre de cada país.
+            </remarks>
+            <response code="200">Operación exitosa. Devuelve un array con los países, cada uno con su Id y Nombre.</response>
+        </member>
+    </members>
+</doc>

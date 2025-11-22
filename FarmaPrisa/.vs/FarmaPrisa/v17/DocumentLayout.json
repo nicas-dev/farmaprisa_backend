@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\services\\productservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:services\\productservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\services\\brandservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:services\\brandservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\models\\dtos\\products\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\products\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\services\\interface\\ibrandrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:services\\interface\\ibrandrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\models\\dtos\\brands\\brandsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\brands\\brandsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\farmaprisa\\models\\entities\\brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\entities\\brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:27:49.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductService .cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Services\\ProductService .cs",
+              "RelativeDocumentMoniker": "Services\\ProductService .cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Services\\ProductService .cs",
+              "RelativeToolTip": "Services\\ProductService .cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:05:00.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductDto.cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Models\\Dtos\\Products\\ProductDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\Products\\ProductDto.cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Models\\Dtos\\Products\\ProductDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\Products\\ProductDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:37:07.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Brand.cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Models\\Entities\\Brand.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Brand.cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Models\\Entities\\Brand.cs",
+              "RelativeToolTip": "Models\\Entities\\Brand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:10:08.484Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BrandsDto.cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Models\\Dtos\\Brands\\BrandsDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\Brands\\BrandsDto.cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Models\\Dtos\\Brands\\BrandsDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\Brands\\BrandsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:09:52.006Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IBrandRepository.cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Services\\Interface\\IBrandRepository.cs",
+              "RelativeDocumentMoniker": "Services\\Interface\\IBrandRepository.cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Services\\Interface\\IBrandRepository.cs",
+              "RelativeToolTip": "Services\\Interface\\IBrandRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T16:51:18.609Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BrandService.cs",
+              "DocumentMoniker": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Services\\BrandService.cs",
+              "RelativeDocumentMoniker": "Services\\BrandService.cs",
+              "ToolTip": "C:\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\Services\\BrandService.cs",
+              "RelativeToolTip": "Services\\BrandService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T16:50:54.148Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

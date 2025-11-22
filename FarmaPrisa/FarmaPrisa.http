@@ -1,0 +1,6 @@
+@FarmaPrisa_HostAddress = http://localhost:5072
+
+GET {{FarmaPrisa_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
