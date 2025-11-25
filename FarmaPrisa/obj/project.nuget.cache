@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QoIqV3NSUR4=",
+  "dgSpecHash": "OxE/hzEN/5c=",
   "success": true,
-  "projectFilePath": "C:\\Users\\IT Vicar\\Downloads\\farmaprisa\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\FarmaPrisa.csproj",
+  "projectFilePath": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\FarmaPrisa.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\IT Vicar\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\IT Vicar\\.nuget\\packages\\closedxml\\0.105.0\\closedxml.0.105.0.nupkg.sha512",

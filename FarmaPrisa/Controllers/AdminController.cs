@@ -15,16 +15,16 @@
     public class AdminController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
-        private readonly IPedidoService _pedidoService; // Servicio para gestionar pedidos
+        //private readonly IPedidoService _pedidoService; // Servicio para gestionar pedidos
         //private readonly IProductosService _productosService; // Servicio para gestionar productos
         // Puedes inyectar otros servicios de administración aquí
 
-        public AdminController(IUsuarioService usuarioService, IPedidoService pedidoService) /*IProductosService productosService*/
-        {
-            _usuarioService = usuarioService;
-            _pedidoService = pedidoService;
-            //_productosService = productosService;
-        }
+        //public AdminController(IUsuarioService usuarioService, IPedidoService pedidoService) /*IProductosService productosService*/
+        //{
+        //    _usuarioService = usuarioService;
+        //    _pedidoService = pedidoService;
+        //    //_productosService = productosService;
+        //}
 
         /// <summary>
         /// Devuelve el listado completo de todos los usuarios registrados (activos e inactivos). Solo Administradores.
@@ -104,14 +104,14 @@
         /// </remarks>
         /// <response code="200">Listado de Pedidos con información resumida.</response>
         /// <response code="403">Acceso denegado (el usuario no tiene el rol 'administrador').</response>
-        [HttpGet("pedidos")]
-        [ProducesResponseType(typeof(IEnumerable<PedidoAdminDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetPedidosAdmin()
-        {
-            var pedidos = await _pedidoService.GetPedidosAdminAsync();
-            return Ok(pedidos);
-        }
+        //[HttpGet("pedidos")]
+        //[ProducesResponseType(typeof(IEnumerable<PedidoAdminDto>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
+        //public async Task<IActionResult> GetPedidosAdmin()
+        //{
+        //    var pedidos = await _pedidoService.GetPedidosAdminAsync();
+        //    return Ok(pedidos);
+        //}
 
         /// <summary>
         /// Muestra el detalle completo de un pedido específico, incluyendo artículos, costos, cliente y estado de pago. Solo Administradores.
@@ -124,21 +124,21 @@
         /// <response code="200">Devuelve el objeto PedidoDetalleDto completo.</response>
         /// <response code="404">Pedido no encontrado.</response>
         /// <response code="403">Acceso denegado.</response>
-        [HttpGet("pedidos/{id}")]
-        [ProducesResponseType(typeof(PedidoDetalleDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetPedidoDetalle(int id)
-        {
-            var detalle = await _pedidoService.GetPedidoDetalleAdminAsync(id);
+        //[HttpGet("pedidos/{id}")]
+        //[ProducesResponseType(typeof(PedidoDetalleDto), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
+        //public async Task<IActionResult> GetPedidoDetalle(int id)
+        //{
+        //    var detalle = await _pedidoService.GetPedidoDetalleAdminAsync(id);
 
-            if (detalle == null)
-            {
-                return NotFound($"Pedido con ID {id} no encontrado.");
-            }
+        //    if (detalle == null)
+        //    {
+        //        return NotFound($"Pedido con ID {id} no encontrado.");
+        //    }
 
-            return Ok(detalle);
-        }
+        //    return Ok(detalle);
+        //}
 
         /// <summary>
         /// Carga masiva de productos desde un archivo CSV o Excel. Solo Administradores.
@@ -354,14 +354,14 @@
         /// </remarks>
         /// <response code="200">Objeto DashboardDataDto con todos los indicadores.</response>
         /// <response code="403">Acceso denegado.</response>
-        [HttpGet("dashboard")]
-        [ProducesResponseType(typeof(DashboardDataDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetDashboardData()
-        {
-            var data = await _pedidoService.GetDashboardDataAsync();
-            return Ok(data);
-        }
+        //[HttpGet("dashboard")]
+        //[ProducesResponseType(typeof(DashboardDataDto), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
+        //public async Task<IActionResult> GetDashboardData()
+        //{
+        //    var data = await _pedidoService.GetDashboardDataAsync();
+        //    return Ok(data);
+        //}
 
         /// <summary>
         /// Devuelve el listado completo del inventario con paginación para la gestión de stock. Solo Administradores.

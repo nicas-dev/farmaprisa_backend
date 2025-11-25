@@ -20,5 +20,5 @@ public partial class HorariosSucursal
 
     public TimeOnly HoraCierre { get; set; }
 
-    public virtual Sucursale Sucursal { get; set; } = null!;
+    public virtual Branch Sucursal { get; set; } = null!;
 }

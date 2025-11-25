@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\IT Vicar\\Downloads\\farmaprisa\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\FarmaPrisa.csproj": {}
+    "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\FarmaPrisa.csproj": {}
   },
   "projects": {
-    "C:\\Users\\IT Vicar\\Downloads\\farmaprisa\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\FarmaPrisa.csproj": {
+    "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\FarmaPrisa.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IT Vicar\\Downloads\\farmaprisa\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\FarmaPrisa.csproj",
+        "projectUniqueName": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\FarmaPrisa.csproj",
         "projectName": "FarmaPrisa",
-        "projectPath": "C:\\Users\\IT Vicar\\Downloads\\farmaprisa\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\FarmaPrisa.csproj",
+        "projectPath": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\FarmaPrisa.csproj",
         "packagesPath": "C:\\Users\\IT Vicar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IT Vicar\\Downloads\\farmaprisa\\farmaprisa\\backend\\nicas-dev\\backend_farmaprisa-eduardo\\FarmaPrisa\\obj\\",
+        "outputPath": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

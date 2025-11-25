@@ -15,31 +15,10 @@ namespace FarmaPrisa.Repository.Service
             _context = context;
         }
 
-      
+        //Metodo para devolver todos los productos.
         public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {
-            //comentario del proceso anterior hecho por Andres Guevara
-            //return await _context.Products
-            //    .Select(p => new ProductDto
-            //    {
-            //        IdProduct = p.IdProduct,
-            //        Name = p.Name,
-            //        Price = p.Price,
-            //        BarCode = p.BarCode,
-            //        CategoryId = p.CategoryId,
-            //        SupplierId = p.SupplierId,
-            //        BrandId = p.BrandId,
-            //        IsActive = p.IsActive,
-            //        Language = p.Language,
-            //        Details = p.Details.Select(d => new ProductDetailDto
-            //        {
-            //            IdProductDetail = d.IdProductDetail,
-            //            ProductId = d.ProductId,
-            //            DetailTypeId = d.DetailTypeId,
-            //            DetailText = d.DetailText
-            //        }).ToList()
-            //    })
-            //    .ToListAsync();
+            
             return await _context.Products
         .Select(p => new ProductDto
         {
@@ -52,6 +31,11 @@ namespace FarmaPrisa.Repository.Service
             BrandId = p.BrandId,
             IsActive = p.IsActive,
             Language = p.Language,
+
+            //DESCRIPCIONES
+             CategoryName= p.Category != null ? p.Category.Nombre : null,
+             SupplierName = p.Supplier != null ? p.Supplier.Nombre : null,
+             BrandName = p.Brand != null ? p.Brand.Name : null,
 
             Details = p.Details.Select(d => new ProductDetailDto
             {
@@ -84,32 +68,10 @@ namespace FarmaPrisa.Repository.Service
         .ToListAsync();
         }
 
-  
+        //Metodo para devolver productos por ID
         public async Task<ProductDto?> GetByIdAsync(int id)
         {
-            //return await _context.Products
-            //    .Where(p => p.IdProduct == id)
-            //    .Select(p => new ProductDto
-            //    {
-            //        IdProduct = p.IdProduct,
-            //        Name = p.Name,
-            //        Price = p.Price,
-            //        BarCode = p.BarCode,
-            //        CategoryId = p.CategoryId,
-            //        SupplierId = p.SupplierId,
-            //        BrandId = p.BrandId,
-            //        IsActive = p.IsActive,
-            //        Language = p.Language,
-            //        Details = p.Details.Select(d => new ProductDetailDto
-            //        {
-            //            IdProductDetail = d.IdProductDetail,
-            //            ProductId = d.ProductId,
-            //            DetailTypeId = d.DetailTypeId,
-            //            DetailText = d.DetailText
-            //        }).ToList()
-            //    })
-            //    .FirstOrDefaultAsync();
-
+            
             return await _context.Products
        .Where(p => p.IdProduct == id)
        .Select(p => new ProductDto
@@ -123,6 +85,11 @@ namespace FarmaPrisa.Repository.Service
            BrandId = p.BrandId,
            IsActive = p.IsActive,
            Language = p.Language,
+
+           //DESCRIPCIONES
+           CategoryName = p.Category != null ? p.Category.Nombre : null,
+           SupplierName = p.Supplier != null ? p.Supplier.Nombre : null,
+           BrandName = p.Brand != null ? p.Brand.Name : null,
 
            Details = p.Details.Select(d => new ProductDetailDto
            {
@@ -153,28 +120,9 @@ namespace FarmaPrisa.Repository.Service
            }).ToList()
        })
        .FirstOrDefaultAsync();
-
-
-
         }
 
-        //public async Task AddAsync(ProductDto productDto)
-        //{
-        //    var product = new Product
-        //    {
-        //        Name = productDto.Name,
-        //        Price = productDto.Price,
-        //        BarCode = productDto.BarCode,
-        //        CategoryId = productDto.CategoryId,
-        //        SupplierId = productDto.SupplierId,
-        //        BrandId = productDto.BrandId,
-        //        IsActive = productDto.IsActive,
-        //        Language = productDto.Language
-        //    };
-
-        //    _context.Products.Add(product);
-        //    await _context.SaveChangesAsync();
-        //}
+        //Medodo para guardar un producto.
         public async Task AddAsync(ProductDto productDto)
         {
             var product = new Product
@@ -201,25 +149,7 @@ namespace FarmaPrisa.Repository.Service
             productDto.IdProduct = product.IdProduct;
         }
 
-
-        //public async Task UpdateAsync(ProductDto productDto)
-        //{
-        //    var product = await _context.Products.FindAsync(productDto.IdProduct);
-        //    if (product == null) return;
-
-        //    product.Name = productDto.Name;
-        //    product.Price = productDto.Price;
-        //    product.BarCode = productDto.BarCode;
-        //    product.CategoryId = productDto.CategoryId;
-        //    product.SupplierId = productDto.SupplierId;
-        //    product.BrandId = productDto.BrandId;
-        //    product.IsActive = productDto.IsActive;
-        //    product.Language = productDto.Language;
-
-        //    _context.Products.Update(product);
-        //    await _context.SaveChangesAsync();
-        //}
-
+        //Metodo para actualizar un producto.
         public async Task UpdateAsync(ProductDto productDto)
         {
             var product = await _context.Products
@@ -267,18 +197,7 @@ namespace FarmaPrisa.Repository.Service
             await _context.SaveChangesAsync();
         }
 
-
-
-        //public async Task DeleteAsync(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-        //    if (product == null) return;
-
-        //    _context.Products.Remove(product);
-        //    await _context.SaveChangesAsync();
-        //}
-
-
+        //Metodo para desactivar un producto.
         public async Task DeleteAsync(int id)
         {
             var product = await _context.Products
@@ -294,6 +213,204 @@ namespace FarmaPrisa.Repository.Service
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
         }
+
+        //public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
+        //{
+        //    // 1. Iniciamos la consulta desde el Inventario de la Sucursal
+        //    var query = _context.Inventories
+        //        .Include(inv => inv.Product)
+        //            .ThenInclude(p => p.Brand)
+        //        .Include(inv => inv.Product)
+        //            .ThenInclude(p => p.Category)
+        //        .Include(inv => inv.Product)
+        //            ///.ThenInclude(p => p.Opi) // Asumiendo que existe esta navegación
+        //        .Where(inv => inv.IdBranch == branchId
+        //                   && inv.IsActive // Asumiendo propiedad para activar/desactivar en sucursal
+        //                   && inv.Product.IsActive == true); // Asumiendo estado global activo
+
+        //    // 2. Aplicamos filtros dinámicos
+        //    if (categoryId.HasValue)
+        //    {
+        //        query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
+        //    }
+
+        //    if (brandId.HasValue)
+        //    {
+        //        query = query.Where(inv => inv.Product.BrandId == brandId.Value);
+        //    }
+
+        //    if (!string.IsNullOrEmpty(search))
+        //    {
+        //        query = query.Where(inv => inv.Product.Name.Contains(search)
+        //                                || inv.Product.BarCode.Contains(search));
+        //    }
+
+        //    // 3. Proyección optimizada (Select)
+        //    var resultados = await query
+        //        .Select(inv => new ProductCardDto
+        //        {
+        //            ProductId = inv.Product.IdProduct,
+        //            Name = inv.Product.Name,
+        //            ImageUrl = inv.Product.Imagenes.FirstOrDefault().UrlImagen ?? "",
+        //            BrandName = inv.Product.Brand.Name,
+        //            CategoryName = inv.Product.Category.Nombre,
+
+        //            // Datos locales de la sucursal
+        //            //CurrentPrice = inv.InventoryDetails.Price,
+        //            AvailableStock = inv.InventoryDetails.Sum(d => d.stock ),
+
+        //            //// Lógica de negocio
+        //            //IsNew = inv.Product. > DateTime.Now.AddDays(-30),
+
+        //            //// Cálculo de rating (Null check por seguridad)
+        //            //RatingPromedio = inv.Producto.Opiniones.Any()
+        //            //                 ? inv.Producto.Opiniones.Average(o => o.Puntuacion)
+        //            //                 : 0,
+        //            //CantidadReviews = inv.Producto.Opiniones.Count()
+        //        })
+        //        .OrderByDescending(p => p.StockDisponible > 0) // Priorizar disponibles
+        //        .ThenBy(p => p.Nombre)
+        //        .ToListAsync();
+
+        //    return resultados;
+        //}
+
+       // metodo para listar productos tomando en cuenta de sucursal
+        public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
+        {
+            // 1. Iniciamos la consulta
+            var query = _context.Inventories
+                .Include(inv => inv.Product)
+                    .ThenInclude(p => p.Brand)
+                .Include(inv => inv.Product)
+                    .ThenInclude(p => p.Category)
+                .Include(inv => inv.InventoryDetails) // <--- IMPORTANTE: Incluir detalles para poder sumar stock/precio
+                .Where(inv => inv.IdBranch == branchId
+                           && inv.IsActive
+                           && inv.Product.IsActive == true);
+
+            // 2. Filtros
+            if (categoryId.HasValue)
+            {
+                query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
+            }
+
+            if (brandId.HasValue)
+            {
+                query = query.Where(inv => inv.Product.BrandId == brandId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(inv => inv.Product.Name.Contains(search)
+                                        || inv.Product.BarCode.Contains(search));
+            }
+
+            // 3. Proyección
+            var resultados = await query
+                .Select(inv => new ProductCardDto
+                {
+                    ProductId = inv.Product.IdProduct,
+                    Name = inv.Product.Name,
+                    // Manejo seguro de imagen (si la lista es null o vacía)
+                    ImageUrl = inv.Product.Imagenes != null && inv.Product.Imagenes.Any()
+                               ? inv.Product.Imagenes.FirstOrDefault().UrlImagen
+                               : "",
+                    BrandName = inv.Product.Brand.Name,
+                    CategoryName = inv.Product.Category.Nombre,
+
+                    // --- LÓGICA DE INVENTARIO DETALLADO ---
+
+                    // Sumar stock de todos los detalles (lotes)
+                    AvailableStock = inv.InventoryDetails.Sum(d => d.stock),
+
+                    // Tomar el precio del primer detalle disponible (o 0 si no hay)
+                    // Asumiendo que la propiedad en InventoryDetails se llama 'Price' o 'SalePrice'
+                    CurrentPrice = inv.InventoryDetails
+                                      .OrderByDescending(d => d.stock) // Priorizamos el precio del lote con más stock
+                                      .Select(d => d.Price) // <--- Verifica si se llama 'Price' o 'Precio'
+                                      .FirstOrDefault(),
+
+                    // --- EXTRAS (Comentados hasta que tengas las propiedades) ---
+                    // IsNew = inv.Product.CreatedAt > DateTime.Now.AddDays(-30),
+                    // RatingPromedio = ...
+                })
+                .OrderByDescending(p => p.AvailableStock > 0) // Mostrar disponibles primero
+                .ThenBy(p => p.Name)
+                .ToListAsync();
+
+            return resultados;
+        }
+
+
+
+        //public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
+        //{
+        //    // 1. Iniciamos la consulta
+        //    var query = _context.Inventories
+        //        .Include(inv => inv.Product)
+        //            .ThenInclude(p => p.Brand)
+        //        .Include(inv => inv.Product)
+        //            .ThenInclude(p => p.Category)
+        //        .Include(inv => inv.InventoryDetails) // Importante para sumar stock
+        //        .Where(inv => inv.IdBranch == branchId
+        //                   && inv.IsActive
+        //                   && inv.Product.IsActive == true);
+
+        //    // 2. Filtros
+        //    if (categoryId.HasValue)
+        //    {
+        //        query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
+        //    }
+
+        //    if (brandId.HasValue)
+        //    {
+        //        query = query.Where(inv => inv.Product.BrandId == brandId.Value);
+        //    }
+
+        //    if (!string.IsNullOrEmpty(search))
+        //    {
+        //        query = query.Where(inv => inv.Product.Name.Contains(search)
+        //                                || inv.Product.BarCode.Contains(search));
+        //    }
+
+        //    // 3. Agrupación y Proyección
+        //    // Agrupamos por Producto para unificar proveedores duplicados
+        //    var resultados = await query
+        //        .GroupBy(inv => inv.Product)
+        //        .Select(g => new ProductCardDto
+        //        {
+        //            ProductId = g.Key.IdProduct,
+        //            Name = g.Key.Name,
+
+        //            // Imagen: Tomamos la primera disponible del producto
+        //            ImageUrl = g.Key.Imagenes != null && g.Key.Imagenes.Any()
+        //                       ? g.Key.Imagenes.FirstOrDefault().UrlImagen
+        //                       : "",
+
+        //            BrandName = g.Key.Brand.Name,
+        //            CategoryName = g.Key.Category.Nombre,
+
+        //            // --- LÓGICA DE INVENTARIO DETALLADO (AGREGADA) ---
+
+        //            // Sumamos el stock de TODOS los inventarios (proveedores) y sus detalles
+        //            AvailableStock = g.Sum(inv => inv.InventoryDetails.Sum(d => d.stock)),
+
+        //            // Precio: Buscamos el precio en todos los detalles de todos los inventarios del grupo
+        //            CurrentPrice = g.SelectMany(inv => inv.InventoryDetails)
+        //                            .OrderByDescending(d => d.stock) // Priorizamos el precio del lote con más stock
+        //                            .Select(d => d.Price)
+        //                            .FirstOrDefault()
+
+        //            // --- EXTRAS ---
+        //            // IsNew = g.Key.CreatedAt > DateTime.Now.AddDays(-30),
+        //        })
+        //        .OrderByDescending(p => p.AvailableStock > 0) // Mostrar disponibles primero
+        //        .ThenBy(p => p.Name)
+        //        .ToListAsync();
+
+        //    return resultados;
+        //}
 
     }
 }

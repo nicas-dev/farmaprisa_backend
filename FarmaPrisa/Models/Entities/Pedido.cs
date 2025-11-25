@@ -42,7 +42,7 @@ public partial class Pedido
 
     public virtual RecetasMedica? Receta { get; set; }
 
-    public virtual Sucursale? SucursalRecogida { get; set; }
+    public virtual Branch? SucursalRecogida { get; set; }
 
     public virtual ICollection<Transaccione> Transacciones { get; set; } = new List<Transaccione>();
 

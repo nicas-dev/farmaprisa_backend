@@ -240,149 +240,6 @@
         }
       }
     },
-    "/admin/pedidos": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "summary": "Muestra la lista de todos los pedidos registrados en el sistema con un resumen de su estado. Solo Administradores.",
-        "description": "Este endpoint es utilizado por el dashboard para la gestión de órdenes.\r\nIncluye el nombre del cliente, el estado, el tipo de entrega y el total.",
-        "responses": {
-          "200": {
-            "description": "Listado de Pedidos con información resumida.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PedidoAdminDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PedidoAdminDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PedidoAdminDto"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Acceso denegado (el usuario no tiene el rol 'administrador').",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/pedidos/{id}": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "summary": "Muestra el detalle completo de un pedido específico, incluyendo artículos, costos, cliente y estado de pago. Solo Administradores.",
-        "description": "Requiere el rol 'administrador'. Este es el endpoint utilizado por la vista de detalle de la orden.\r\nCarga datos complejos como detalles_pedido, cliente, dirección y transacciones.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID del pedido a consultar.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve el objeto PedidoDetalleDto completo.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PedidoDetalleDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PedidoDetalleDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PedidoDetalleDto"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Pedido no encontrado.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Acceso denegado.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/productos/{id}/galeria": {
       "post": {
         "tags": [
@@ -630,57 +487,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Acceso denegado.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/dashboard": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "summary": "Devuelve todos los datos estadísticos y de gestión necesarios para el Dashboard del Administrador.",
-        "description": "Requiere el rol 'administrador'. Consolida KPIs, gráficos de ventas y alertas de inventario.",
-        "responses": {
-          "200": {
-            "description": "Objeto DashboardDataDto con todos los indicadores.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/DashboardDataDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DashboardDataDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DashboardDataDto"
                 }
               }
             }
@@ -1486,6 +1292,29 @@
         }
       }
     },
+    "/branch/{branchId}": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/ProductosExcel/importar-excel": {
       "post": {
         "tags": [
@@ -1786,6 +1615,83 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/Products/{branchId}/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Lista todos los productos por sucursal, categiorias, marcas.",
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductCardDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductCardDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductCardDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2798,70 +2704,6 @@
         },
         "additionalProperties": false
       },
-      "DashboardDataDto": {
-        "type": "object",
-        "properties": {
-          "ingresosDiarios": {
-            "type": "number",
-            "format": "double"
-          },
-          "totalUsuariosRegistrados": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nuevasOrdenesDiarias": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ventasUltimos6Meses": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          },
-          "pedidosDiarios": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DetallePedidoItemDto": {
-        "type": "object",
-        "properties": {
-          "productoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nombreProducto": {
-            "type": "string",
-            "nullable": true
-          },
-          "imagenUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "cantidad": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "precioUnitario": {
-            "type": "number",
-            "format": "double"
-          },
-          "subtotal": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
       "GenericBrandDto": {
         "required": [
           "name"
@@ -2897,117 +2739,6 @@
         },
         "additionalProperties": false
       },
-      "PedidoAdminDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fechaPedido": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "estado": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoEntrega": {
-            "type": "string",
-            "nullable": true
-          },
-          "total": {
-            "type": "number",
-            "format": "double"
-          },
-          "usuarioId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "clienteNombre": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PedidoDetalleDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fechaPedido": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "estado": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoEntrega": {
-            "type": "string",
-            "nullable": true
-          },
-          "subtotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "costoEnvio": {
-            "type": "number",
-            "format": "double"
-          },
-          "montoDescuento": {
-            "type": "number",
-            "format": "double"
-          },
-          "montoImpuesto": {
-            "type": "number",
-            "format": "double"
-          },
-          "total": {
-            "type": "number",
-            "format": "double"
-          },
-          "usuarioId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "clienteNombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "clienteEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "sucursalRecogidaNombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "direccionCompletaEnvio": {
-            "type": "string",
-            "nullable": true
-          },
-          "articulos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DetallePedidoItemDto"
-            },
-            "nullable": true
-          },
-          "estadoTransaccion": {
-            "type": "string",
-            "nullable": true
-          },
-          "pasarelaPago": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -3034,6 +2765,55 @@
           }
         },
         "additionalProperties": { }
+      },
+      "ProductCardDto": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "brandName": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "availableStock": {
+            "type": "number",
+            "format": "double"
+          },
+          "isOutOfStock": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isNew": {
+            "type": "boolean"
+          },
+          "averageRating": {
+            "type": "number",
+            "format": "double"
+          },
+          "reviewCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
       },
       "ProductDetailDto": {
         "type": "object",
@@ -3080,13 +2860,25 @@
             "type": "integer",
             "format": "int32"
           },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
           "supplierId": {
             "type": "integer",
             "format": "int32"
           },
+          "supplierName": {
+            "type": "string",
+            "nullable": true
+          },
           "brandId": {
             "type": "integer",
             "format": "int32"
+          },
+          "brandName": {
+            "type": "string",
+            "nullable": true
           },
           "isActive": {
             "type": "boolean"

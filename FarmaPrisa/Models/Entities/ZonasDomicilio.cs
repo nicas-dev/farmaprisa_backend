@@ -24,5 +24,5 @@ public partial class ZonasDomicilio
 
     public virtual ICollection<HorariosDomicilio> HorariosDomicilios { get; set; } = new List<HorariosDomicilio>();
 
-    public virtual Sucursale Sucursal { get; set; } = null!;
+    public virtual Branch Sucursal { get; set; } = null!;
 }

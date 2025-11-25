@@ -1,7 +1,4 @@
-wwwroot\images\productos\15c50910-2d6f-4b81-b1e7-ce97f00c9340.jpg
-wwwroot\images\productos\187b1246-7a1d-4a32-a91f-a7124de5bad4.png
-wwwroot\images\productos\eaad5274-c9c7-4737-86ec-0613922c8e4e.png
-wwwroot\images\productos\f07cc44b-6b23-4bc2-9e3e-57619e4851e3.jpg
+wwwroot\images\05106b3b-431e-4d61-b1f0-8c78e804b6cd.webp
 wwwroot\images\0dc8ae79-57c3-4404-92ce-07afa12ab788_00300450496607_Right.png
 wwwroot\images\1306bfe8-1e36-4d7d-8f22-28bddd160c35_00300450496607_Right.png
 wwwroot\images\25601e41-09e8-44e2-b533-4b82b80dcf34_images.jpg
@@ -17,6 +14,7 @@ wwwroot\images\6ef28059-2d65-4dca-827b-a40cb6d3e2cd_images.jpg
 wwwroot\images\704417ce-c300-4e03-b09e-9094a6e06796_images (1).jpg
 wwwroot\images\77c95cd1-3f25-402a-8a00-6d676ad75e53.jpg
 wwwroot\images\7ab33022-a1f2-435a-8a1c-aff186ab307a_images (1).jpg
+wwwroot\images\7d5b2b6a-170c-4f47-bf46-25f7abb34378.jpg
 wwwroot\images\925e8f5a-21fc-4092-9bcf-3817a839b432_images.jpg
 wwwroot\images\9650b78b-7dd2-4722-a22f-3ec4d8c14b07_00300450496607_Right.png
 wwwroot\images\96bfcdf5-d249-467a-8b22-cecefc3c3094.png
@@ -30,9 +28,12 @@ wwwroot\images\c6eb9aad-5001-44cc-a114-0d4e94daa724_00300450496607_Right.png
 wwwroot\images\c7c3e528-5896-41fb-8747-8aa88a729023_images (1).jpg
 wwwroot\images\cf9035de-5548-4bc5-9bc4-2cfca8d48fbd_images.jpg
 wwwroot\images\d86f128f-ba0d-4c4b-811d-e4b7215aa2ff_00300450496607_Right.png
+wwwroot\images\dcb1f97e-691f-465c-8b58-abe52736864f.webp
 wwwroot\images\f467821c-b5d8-4b1c-8324-b1a659030c7c_images (1).jpg
 wwwroot\images\f9c1da09-ab98-4a97-bcd2-39a71f83620e.jpg
 wwwroot\images\fe484fc6-2285-4289-b53b-ba7e55226a8d.jpg
-wwwroot\images\05106b3b-431e-4d61-b1f0-8c78e804b6cd.webp
-wwwroot\images\7d5b2b6a-170c-4f47-bf46-25f7abb34378.jpg
-wwwroot\images\dcb1f97e-691f-465c-8b58-abe52736864f.webp
+wwwroot\images\ff125b40-ca56-453a-a729-66ae50911a70.jpg
+wwwroot\images\productos\15c50910-2d6f-4b81-b1e7-ce97f00c9340.jpg
+wwwroot\images\productos\187b1246-7a1d-4a32-a91f-a7124de5bad4.png
+wwwroot\images\productos\eaad5274-c9c7-4737-86ec-0613922c8e4e.png
+wwwroot\images\productos\f07cc44b-6b23-4bc2-9e3e-57619e4851e3.jpg

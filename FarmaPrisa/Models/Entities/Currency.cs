@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace FarmaPrisa.Models.Entities
 {
@@ -14,8 +15,5 @@ namespace FarmaPrisa.Models.Entities
         [Required]
         [StringLength(5)]
         public string Currencysymbol { get; set; }
-
-
-
     }
 }

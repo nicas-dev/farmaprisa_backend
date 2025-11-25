@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FarmaPrisa.Models.Entities;
 
@@ -19,6 +20,11 @@ public partial class Categoria
     public string? Descripcion { get; set; }
 
     public int? CategoriaPadreId { get; set; }
+
+    //[Required, ForeignKey("Branch")]
+    //public int IdBranch { get; set; } aun no se define si sera global o por sucursal.
+
+    public virtual Branch Branch { get; set; } = null!;
 
     public virtual Categoria? CategoriaPadre { get; set; }
 

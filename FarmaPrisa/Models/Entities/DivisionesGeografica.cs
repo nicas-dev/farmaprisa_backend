@@ -24,7 +24,7 @@ public partial class DivisionesGeografica
 
     public virtual ICollection<DivisionesGeografica> InverseDivisionPadre { get; set; } = new List<DivisionesGeografica>();
 
-    public virtual ICollection<Sucursale> Sucursales { get; set; } = new List<Sucursale>();
+    public virtual ICollection<Branch> Sucursales { get; set; } = new List<Branch>();
 
     public virtual ICollection<TasasImpuesto> TasasImpuestos { get; set; } = new List<TasasImpuesto>();
 

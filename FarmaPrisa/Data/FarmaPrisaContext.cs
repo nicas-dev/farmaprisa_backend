@@ -17,6 +17,7 @@ public partial class FarmaPrisaContext : DbContext
     {
     }
 
+
     public virtual DbSet<Aseguradora> Aseguradoras { get; set; }
 
     public virtual DbSet<CarritoItem> CarritoItems { get; set; }
@@ -30,8 +31,6 @@ public partial class FarmaPrisaContext : DbContext
     public virtual DbSet<DivisionesGeografica> DivisionesGeograficas { get; set; }
 
     public virtual DbSet<HorariosDomicilio> HorariosDomicilios { get; set; }
-
-    public virtual DbSet<HorariosSucursal> HorariosSucursals { get; set; }
 
     public virtual DbSet<InventarioSucursal> InventarioSucursals { get; set; }
 
@@ -65,7 +64,7 @@ public partial class FarmaPrisaContext : DbContext
 
     public virtual DbSet<Sintoma> Sintomas { get; set; }
 
-    public virtual DbSet<Sucursale> Sucursales { get; set; }
+   
 
     public virtual DbSet<TasasImpuesto> TasasImpuestos { get; set; }
 
@@ -81,15 +80,22 @@ public partial class FarmaPrisaContext : DbContext
     public virtual DbSet<ZonasDomicilio> ZonasDomicilios { get; set; }
     public virtual DbSet<PlantillaProductos> PlantillaProductos { get; set; }
 
+
+
     //Tablas agregadas
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductDetail> ProductDetails { get; set; }
     public DbSet<Brand> Brands { get; set; }
     public DbSet<DetailType> DetailType { get; set; }
     public DbSet<Currency> Currencys { get; set; }
-    public DbSet<Company> Companys { get; set; }
+    public DbSet<Company> Companies { get; set; }
 
-    
+ 
+     public DbSet<Branch> Branches { get; set; }
+    public DbSet<Inventory> Inventories { get; set; }
+
+
+
 
     // Lo eliminamos para que Entity Framework utilice la configuración que ya establecimos en Program.cs, que es la forma correcta y centralizada de manejar la configuración de la base de datos en ASP.NET Core.
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -230,63 +236,7 @@ public partial class FarmaPrisaContext : DbContext
                 .HasConstraintName("divisiones_geograficas_ibfk_1");
         });
 
-        modelBuilder.Entity<HorariosDomicilio>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("horarios_domicilio", tb => tb.HasComment("Tabla para gestión de horarios de los domicilio"));
-
-            entity.HasIndex(e => e.ZonaId, "zona_id");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.DiaSemana)
-                .HasColumnType("enum('lunes','martes','miercoles','jueves','viernes','sabado','domingo')")
-                .HasColumnName("dia_semana");
-            entity.Property(e => e.HoraCierre)
-                .HasColumnType("time")
-                .HasColumnName("hora_cierre");
-            entity.Property(e => e.HoraInicio)
-                .HasColumnType("time")
-                .HasColumnName("hora_inicio");
-            entity.Property(e => e.ZonaId)
-                .HasColumnType("int(11)")
-                .HasColumnName("zona_id");
-
-            entity.HasOne(d => d.Zona).WithMany(p => p.HorariosDomicilios)
-                .HasForeignKey(d => d.ZonaId)
-                .HasConstraintName("horarios_domicilio_ibfk_1");
-        });
-
-        modelBuilder.Entity<HorariosSucursal>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("horarios_sucursal", tb => tb.HasComment("Tabla para los horarios de las sucursal"));
-
-            entity.HasIndex(e => e.SucursalId, "sucursal_id");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.DiaSemana)
-                .HasColumnType("enum('lunes','martes','miercoles','jueves','viernes','sabado','domingo')")
-                .HasColumnName("dia_semana");
-            entity.Property(e => e.HoraApertura)
-                .HasColumnType("time")
-                .HasColumnName("hora_apertura");
-            entity.Property(e => e.HoraCierre)
-                .HasColumnType("time")
-                .HasColumnName("hora_cierre");
-            entity.Property(e => e.SucursalId)
-                .HasColumnType("int(11)")
-                .HasColumnName("sucursal_id");
-
-            entity.HasOne(d => d.Sucursal).WithMany(p => p.HorariosSucursals)
-                .HasForeignKey(d => d.SucursalId)
-                .HasConstraintName("horarios_sucursal_ibfk_1");
-        });
 
 
 
@@ -413,79 +363,6 @@ public partial class FarmaPrisaContext : DbContext
                 .HasConstraintName("paginas_informativas_ibfk_1");
         });
 
-        modelBuilder.Entity<Pedido>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("pedidos", tb => tb.HasComment("Tabla para guardar los pedidos de los clientes."));
-
-            entity.HasIndex(e => e.DireccionId, "direccion_id");
-
-            entity.HasIndex(e => e.RecetaId, "receta_id");
-
-            entity.HasIndex(e => e.SucursalRecogidaId, "sucursal_recogida_id");
-
-            entity.HasIndex(e => e.UsuarioId, "usuario_id");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.CostoEnvio)
-                .HasPrecision(10, 2)
-                .HasColumnName("costo_envio");
-            entity.Property(e => e.DireccionId)
-                .HasColumnType("int(11)")
-                .HasColumnName("direccion_id");
-            entity.Property(e => e.Estado)
-                .HasDefaultValueSql("'pendiente'")
-                .HasColumnType("enum('pendiente','procesando','listo_para_recoger','en_camino','entregado','cancelado')")
-                .HasColumnName("estado");
-            entity.Property(e => e.FechaPedido)
-                .HasDefaultValueSql("current_timestamp()")
-                .HasColumnType("timestamp")
-                .HasColumnName("fecha_pedido");
-            entity.Property(e => e.MontoDescuento)
-                .HasPrecision(10, 2)
-                .HasColumnName("monto_descuento");
-            entity.Property(e => e.MontoImpuesto)
-                .HasPrecision(10, 2)
-                .HasColumnName("monto_impuesto");
-            entity.Property(e => e.RecetaId)
-                .HasColumnType("int(11)")
-                .HasColumnName("receta_id");
-            entity.Property(e => e.Subtotal)
-                .HasPrecision(10, 2)
-                .HasColumnName("subtotal");
-            entity.Property(e => e.SucursalRecogidaId)
-                .HasColumnType("int(11)")
-                .HasColumnName("sucursal_recogida_id");
-            entity.Property(e => e.TipoEntrega)
-                .HasColumnType("enum('domicilio','recoger_en_tienda')")
-                .HasColumnName("tipo_entrega");
-            entity.Property(e => e.Total)
-                .HasPrecision(10, 2)
-                .HasColumnName("total");
-            entity.Property(e => e.UsuarioId)
-                .HasColumnType("int(11)")
-                .HasColumnName("usuario_id");
-
-            entity.HasOne(d => d.Direccion).WithMany(p => p.Pedidos)
-                .HasForeignKey(d => d.DireccionId)
-                .HasConstraintName("pedidos_ibfk_2");
-
-            entity.HasOne(d => d.Receta).WithMany(p => p.Pedidos)
-                .HasForeignKey(d => d.RecetaId)
-                .HasConstraintName("pedidos_ibfk_4");
-
-            entity.HasOne(d => d.SucursalRecogida).WithMany(p => p.Pedidos)
-                .HasForeignKey(d => d.SucursalRecogidaId)
-                .HasConstraintName("pedidos_ibfk_3");
-
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Pedidos)
-                .HasForeignKey(d => d.UsuarioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("pedidos_ibfk_1");
-        });
 
    
         modelBuilder.Entity<ProductoImagen>(entity =>
@@ -695,44 +572,6 @@ public partial class FarmaPrisaContext : DbContext
             entity.Property(e => e.Nombre).HasColumnName("nombre");
         });
 
-        modelBuilder.Entity<Sucursale>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("sucursales", tb => tb.HasComment("Tabla para gestionar las sucursales"));
-
-            entity.HasIndex(e => e.CiudadId, "ciudad_id");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.CiudadId)
-                .HasColumnType("int(11)")
-                .HasColumnName("ciudad_id");
-            entity.Property(e => e.DireccionCompleta)
-                .HasColumnType("text")
-                .HasColumnName("direccion_completa");
-            entity.Property(e => e.EstaActiva)
-                .HasDefaultValueSql("'1'")
-                .HasColumnName("esta_activa");
-            entity.Property(e => e.Latitud)
-                .HasPrecision(10, 8)
-                .HasColumnName("latitud");
-            entity.Property(e => e.Longitud)
-                .HasPrecision(11, 8)
-                .HasColumnName("longitud");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(255)
-                .HasColumnName("nombre");
-            entity.Property(e => e.Telefono)
-                .HasMaxLength(20)
-                .HasColumnName("telefono");
-
-            entity.HasOne(d => d.Ciudad).WithMany(p => p.Sucursales)
-                .HasForeignKey(d => d.CiudadId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("sucursales_ibfk_1");
-        });
 
         modelBuilder.Entity<TipoDetalle>(entity =>
         {
@@ -940,37 +779,7 @@ public partial class FarmaPrisaContext : DbContext
                 .HasConstraintName("usuario_roles_ibfk_1");
         });
 
-        modelBuilder.Entity<ZonasDomicilio>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("zonas_domicilio", tb => tb.HasComment("Tabla para gestión de las zonas de domicilio"));
-
-            entity.HasIndex(e => e.SucursalId, "sucursal_id");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-            entity.Property(e => e.CostoEnvio)
-                .HasPrecision(10, 2)
-                .HasColumnName("costo_envio");
-            entity.Property(e => e.Descripcion)
-                .HasColumnType("text")
-                .HasColumnName("descripcion");
-            entity.Property(e => e.EstaActiva)
-                .HasDefaultValueSql("'1'")
-                .HasColumnName("esta_activa");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(255)
-                .HasColumnName("nombre");
-            entity.Property(e => e.SucursalId)
-                .HasColumnType("int(11)")
-                .HasColumnName("sucursal_id");
-
-            entity.HasOne(d => d.Sucursal).WithMany(p => p.ZonasDomicilios)
-                .HasForeignKey(d => d.SucursalId)
-                .HasConstraintName("zonas_domicilio_ibfk_1");
-        });
+      
 
         modelBuilder.Entity<OtpUsuario>(entity =>
         {

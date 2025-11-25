@@ -22,7 +22,7 @@ builder.Services.AddDbContext<FarmaPrisaContext>(options =>
 //builder.Services.AddScoped<IProductosService, ProductosService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<IPedidoService, PedidoService>();
+//builder.Services.AddScoped<IPedidoService, PedidoService>();
 builder.Services.AddScoped<IProveedorService, ProveedorService>();
 builder.Services.AddScoped<IPromocionService, PromocionService>();
 builder.Services.AddScoped<ICurrencyRepository, CurrencyService>();
@@ -31,6 +31,7 @@ builder.Services.AddScoped<ICurrencyRepository, CurrencyService>();
 //Nuevos Repositorios
 builder.Services.AddScoped<IProductRepository, ProductService>();
 builder.Services.AddScoped<IBrandRepository, BrandService>();
+builder.Services.AddScoped<IInventoryRepository, InventoryService>();
 
 // Add services to the container.
 

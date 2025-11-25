@@ -24,5 +24,5 @@ public partial class InventarioSucursal
 
     public virtual Product Producto { get; set; } = null!;
 
-    public virtual Sucursale Sucursal { get; set; } = null!;
+    public virtual Branch Sucursal { get; set; } = null!;
 }

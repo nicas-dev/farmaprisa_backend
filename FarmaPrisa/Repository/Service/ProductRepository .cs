@@ -205,5 +205,9 @@ namespace FarmaPrisa.Repository.Service
             await _context.SaveChangesAsync();
         }
 
+        public Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

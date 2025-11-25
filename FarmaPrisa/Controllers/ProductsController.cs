@@ -221,5 +221,32 @@ namespace FarmaPrisa.Controllers
             });
         }
 
+        /// <summary>
+        /// Lista todos los productos por sucursal, categiorias, marcas.
+        /// </summary>
+        /// <param name="branchId"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="brandId"></param>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        [HttpGet("{branchId}/products")]
+        public async Task<ActionResult<List<ProductCardDto>>> Getbranchcatalogs(
+        int branchId,
+         [FromQuery] int? categoryId,
+         [FromQuery] int? brandId,
+         [FromQuery] string? search)
+        {
+            var productos = await _productRepository.GetProductsByBranchAsync(branchId, categoryId, brandId, search);
+
+            if (productos == null || productos.Count == 0)
+            {
+                // Retornamos OK con lista vacía en lugar de NotFound para filtros
+                return Ok(new List<ProductCardDto>());
+            }
+
+            return Ok(productos);
+        }
     }
+
 }
+

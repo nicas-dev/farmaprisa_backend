@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FarmaPrisa")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1d15c3a9bb3087a737d70ee59fafd29030aa6b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+124a3a1f8c1b6ca382cae4f0094048399eaca613")]
 [assembly: System.Reflection.AssemblyProductAttribute("FarmaPrisa")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FarmaPrisa")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

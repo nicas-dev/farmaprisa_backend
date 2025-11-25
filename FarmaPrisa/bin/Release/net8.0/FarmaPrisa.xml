@@ -27,30 +27,6 @@
             <response code="200">Alternancia de estado exitosa. Devuelve un ApiResultDto.</response>
             <response code="404">Usuario no encontrado.</response>
         </member>
-        <member name="M:FarmaPrisa.Controllers.AdminController.GetPedidosAdmin">
-            <summary>
-            Muestra la lista de todos los pedidos registrados en el sistema con un resumen de su estado. Solo Administradores.
-            </summary>
-            <remarks>
-            Este endpoint es utilizado por el dashboard para la gestión de órdenes.
-            Incluye el nombre del cliente, el estado, el tipo de entrega y el total.
-            </remarks>
-            <response code="200">Listado de Pedidos con información resumida.</response>
-            <response code="403">Acceso denegado (el usuario no tiene el rol 'administrador').</response>
-        </member>
-        <member name="M:FarmaPrisa.Controllers.AdminController.GetPedidoDetalle(System.Int32)">
-            <summary>
-            Muestra el detalle completo de un pedido específico, incluyendo artículos, costos, cliente y estado de pago. Solo Administradores.
-            </summary>
-            <remarks>
-            Requiere el rol 'administrador'. Este es el endpoint utilizado por la vista de detalle de la orden.
-            Carga datos complejos como detalles_pedido, cliente, dirección y transacciones.
-            </remarks>
-            <param name="id">ID del pedido a consultar.</param>
-            <response code="200">Devuelve el objeto PedidoDetalleDto completo.</response>
-            <response code="404">Pedido no encontrado.</response>
-            <response code="403">Acceso denegado.</response>
-        </member>
         <member name="M:FarmaPrisa.Controllers.AdminController.GetRoles">
             <summary>
             Sube múltiples imágenes para la galería de un producto existente. Solo Administradores.
@@ -86,16 +62,6 @@
             <response code="400">Datos de entrada inválidos (ej. Correo ya existe).</response>
             <response code="403">Acceso denegado.</response>
             <response code="500">Error interno (ej. Rol no encontrado o fallo en la BD).</response>
-        </member>
-        <member name="M:FarmaPrisa.Controllers.AdminController.GetDashboardData">
-            <summary>
-            Devuelve todos los datos estadísticos y de gestión necesarios para el Dashboard del Administrador.
-            </summary>
-            <remarks>
-            Requiere el rol 'administrador'. Consolida KPIs, gráficos de ventas y alertas de inventario.
-            </remarks>
-            <response code="200">Objeto DashboardDataDto con todos los indicadores.</response>
-            <response code="403">Acceso denegado.</response>
         </member>
         <member name="M:FarmaPrisa.Controllers.AuthController.Register(FarmaPrisa.Models.Dtos.UserRegisterDto)">
             <summary>
@@ -273,6 +239,16 @@
             </summary>
             
         </member>
+        <member name="M:FarmaPrisa.Controllers.ProductsController.Getbranchcatalogs(System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Lista todos los productos por sucursal, categiorias, marcas.
+            </summary>
+            <param name="branchId"></param>
+            <param name="categoryId"></param>
+            <param name="brandId"></param>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
         <member name="M:FarmaPrisa.Controllers.PromocionController.CreatePromocion(FarmaPrisa.Models.Dtos.Promocion.PromocionCreateDto)">
             <summary>
             Crea una nueva promoción y asigna productos o categorías asociadas. Solo Administradores.
@@ -417,100 +393,52 @@
             <response code="403">Acceso denegado. Si el usuario no tiene permisos de administrador.</response>
             <response code="404">No encontrado. Si no existe un usuario con el ID proporcionado.</response>
         </member>
-        <member name="T:FarmaPrisa.Migrations.CreandoBaseDeDatos">
+        <member name="T:FarmaPrisa.Migrations.InitialCreate">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.CreandoBaseDeDatos.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.CreandoBaseDeDatos.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.CreandoBaseDeDatos.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:FarmaPrisa.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand">
+        <member name="T:FarmaPrisa.Migrations.seeliminoTestMigracion">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.seeliminoTestMigracion.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.seeliminoTestMigracion.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.nuevoscambiosendetailtextymetodopostdeguardarbrand.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:FarmaPrisa.Migrations.seeliminoTestMigracion.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands">
+        <member name="T:FarmaPrisa.Migrations.seeliminacatalogosporsucursal">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.seeliminacatalogosporsucursal.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.seeliminacatalogosporsucursal.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.eliminaciondecampodescripciondebrands.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:FarmaPrisa.Migrations.seeliminacatalogosporsucursal.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:FarmaPrisa.Migrations.seagregatablacurrencycompany">
+        <member name="T:FarmaPrisa.Migrations.cambiosentabladetailsinventory">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.seagregatablacurrencycompany.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.cambiosentabladetailsinventory.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.seagregatablacurrencycompany.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FarmaPrisa.Migrations.cambiosentabladetailsinventory.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FarmaPrisa.Migrations.seagregatablacurrencycompany.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:FarmaPrisa.Migrations.nuevosCambios">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nuevosCambios.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nuevosCambios.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nuevosCambios.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:FarmaPrisa.Migrations.nuevosCambios2">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nuevosCambios2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nuevosCambios2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nuevosCambios2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:FarmaPrisa.Migrations.nd2">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nd2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nd2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.nd2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:FarmaPrisa.Migrations.Cambiosenbackendseeliminaronentidadesyconfiguracionesdesamir.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:FarmaPrisa.Migrations.cambiosentabladetailsinventory.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="P:FarmaPrisa.Models.Dtos.Promocion.PromocionDetalleDto.ProductosAsociadosIds">
@@ -649,11 +577,6 @@
         <member name="T:FarmaPrisa.Models.Entities.Sintoma">
             <summary>
             Tabla para almacenar todos los posibles síntomas.
-            </summary>
-        </member>
-        <member name="T:FarmaPrisa.Models.Entities.Sucursale">
-            <summary>
-            Tabla para gestionar las sucursales
             </summary>
         </member>
         <member name="T:FarmaPrisa.Models.Entities.TasasImpuesto">

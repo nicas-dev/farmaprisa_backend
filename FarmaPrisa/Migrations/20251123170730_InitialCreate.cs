@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FarmaPrisa.Migrations
 {
     /// <inheritdoc />
-    public partial class CreandoBaseDeDatos : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,46 +38,25 @@ namespace FarmaPrisa.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "Brands",
+                name: "Currencys",
                 columns: table => new
                 {
-                    IdBrand = table.Column<int>(type: "int", nullable: false)
+                    IdCurrency = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false, collation: "utf8mb4_unicode_ci")
+                    CurrencyName = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Currencysymbol = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TestMigracion = table.Column<string>(type: "longtext", nullable: false, comment: "Campo de prueba", collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Brands", x => x.IdBrand);
+                    table.PrimaryKey("PK_Currencys", x => x.IdCurrency);
                 })
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "categorias",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nombre = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    descripcion = table.Column<string>(type: "text", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    categoria_padre_id = table.Column<int>(type: "int(11)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "categorias_ibfk_1",
-                        column: x => x.categoria_padre_id,
-                        principalTable: "categorias",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.SetNull);
-                },
-                comment: "Para organizar productos. El campo 'categoria_padre_id' nos permite crear subcategorías.")
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -281,32 +260,43 @@ namespace FarmaPrisa.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "sucursales",
+                name: "Companies",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
+                    IdCompany = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nombre = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false, collation: "utf8mb4_unicode_ci")
+                    IdCountry = table.Column<int>(type: "int(11)", nullable: false),
+                    IdCurrency = table.Column<int>(type: "int", nullable: false),
+                    CompanyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    direccion_completa = table.Column<string>(type: "text", nullable: false, collation: "utf8mb4_unicode_ci")
+                    Ruc = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ciudad_id = table.Column<int>(type: "int(11)", nullable: false),
-                    latitud = table.Column<decimal>(type: "decimal(10,8)", precision: 10, scale: 8, nullable: true),
-                    longitud = table.Column<decimal>(type: "decimal(11,8)", precision: 11, scale: 8, nullable: true),
-                    telefono = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true, collation: "utf8mb4_unicode_ci")
+                    Address = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    esta_activa = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValueSql: "'1'")
+                    Telephone = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.PrimaryKey("PK_Companies", x => x.IdCompany);
                     table.ForeignKey(
-                        name: "sucursales_ibfk_1",
-                        column: x => x.ciudad_id,
+                        name: "FK_Companies_Currencys_IdCurrency",
+                        column: x => x.IdCurrency,
+                        principalTable: "Currencys",
+                        principalColumn: "IdCurrency",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Companies_divisiones_geograficas_IdCountry",
+                        column: x => x.IdCountry,
                         principalTable: "divisiones_geograficas",
-                        principalColumn: "id");
-                },
-                comment: "Tabla para gestionar las sucursales")
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -331,119 +321,6 @@ namespace FarmaPrisa.Migrations
                         principalColumn: "id");
                 },
                 comment: "Tabla para la gestión de los impuestos según el país")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "promocion_categorias",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    promocion_id = table.Column<int>(type: "int(11)", nullable: false),
-                    categoria_id = table.Column<int>(type: "int(11)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "promocion_categorias_ibfk_1",
-                        column: x => x.promocion_id,
-                        principalTable: "promociones",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "promocion_categorias_ibfk_2",
-                        column: x => x.categoria_id,
-                        principalTable: "categorias",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                },
-                comment: "Tabla para aplicar una promoción a categorías enteras")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "productos",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nombre = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    tipo_producto = table.Column<string>(type: "enum('fisico','servicio')", nullable: false, defaultValueSql: "'fisico'", collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    precio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    precio_anterior = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: true),
-                    sku = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UnidadMedida = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    requiere_receta = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValueSql: "'0'"),
-                    puntos_para_canje = table.Column<int>(type: "int(11)", nullable: true),
-                    categoria_id = table.Column<int>(type: "int(11)", nullable: true),
-                    proveedor_id = table.Column<int>(type: "int(11)", nullable: true),
-                    FechaVencimiento = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EstaActivo = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "productos_ibfk_1",
-                        column: x => x.categoria_id,
-                        principalTable: "categorias",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "productos_ibfk_2",
-                        column: x => x.proveedor_id,
-                        principalTable: "proveedores",
-                        principalColumn: "id");
-                },
-                comment: "La tabla principal del catálogo de productos.")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    IdProduct = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BarCode = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CategoryId = table.Column<int>(type: "int(11)", nullable: false),
-                    SupplierId = table.Column<int>(type: "int(11)", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Language = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.IdProduct);
-                    table.ForeignKey(
-                        name: "FK_Products_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "IdBrand",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_categorias_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "categorias",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_proveedores_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "proveedores",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -522,256 +399,60 @@ namespace FarmaPrisa.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "horarios_sucursal",
+                name: "Branches",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
+                    IdBranch = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    sucursal_id = table.Column<int>(type: "int(11)", nullable: false),
-                    dia_semana = table.Column<string>(type: "enum('lunes','martes','miercoles','jueves','viernes','sabado','domingo')", nullable: false, collation: "utf8mb4_unicode_ci")
+                    IdCompany = table.Column<int>(type: "int", nullable: false),
+                    BranchName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    hora_apertura = table.Column<TimeOnly>(type: "time", nullable: false),
-                    hora_cierre = table.Column<TimeOnly>(type: "time", nullable: false)
+                    Address = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DivisionesGeograficaId = table.Column<int>(type: "int(11)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.PrimaryKey("PK_Branches", x => x.IdBranch);
                     table.ForeignKey(
-                        name: "horarios_sucursal_ibfk_1",
-                        column: x => x.sucursal_id,
-                        principalTable: "sucursales",
-                        principalColumn: "id",
+                        name: "FK_Branches_Companies_IdCompany",
+                        column: x => x.IdCompany,
+                        principalTable: "Companies",
+                        principalColumn: "IdCompany",
                         onDelete: ReferentialAction.Cascade);
-                },
-                comment: "Tabla para los horarios de las sucursal")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "zonas_domicilio",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nombre = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    descripcion = table.Column<string>(type: "text", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    costo_envio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    sucursal_id = table.Column<int>(type: "int(11)", nullable: false),
-                    esta_activa = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValueSql: "'1'")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
                     table.ForeignKey(
-                        name: "zonas_domicilio_ibfk_1",
-                        column: x => x.sucursal_id,
-                        principalTable: "sucursales",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                },
-                comment: "Tabla para gestión de las zonas de domicilio")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "inventario_sucursal",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true),
-                    sucursal_id = table.Column<int>(type: "int(11)", nullable: false),
-                    stock = table.Column<int>(type: "int(11)", nullable: false),
-                    stock_minimo = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "inventario_sucursal_ibfk_1",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "inventario_sucursal_ibfk_2",
-                        column: x => x.sucursal_id,
-                        principalTable: "sucursales",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                },
-                comment: "Tabla para el inventario por sucursal")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "producto_detalle",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true),
-                    tipo_detalle_id = table.Column<int>(type: "int(11)", nullable: false),
-                    valor_detalle = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    media_url = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    idioma = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_producto_detalle", x => x.id);
-                    table.ForeignKey(
-                        name: "producto_detalle_ibfk_1",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "producto_detalle_ibfk_2",
-                        column: x => x.tipo_detalle_id,
-                        principalTable: "tipo_detalles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "producto_imagenes",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true),
-                    url_imagen = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    orden = table.Column<int>(type: "int(11)", nullable: false),
-                    es_principal = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "producto_imagenes_ibfk_1",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
+                        name: "FK_Branches_divisiones_geograficas_DivisionesGeograficaId",
+                        column: x => x.DivisionesGeograficaId,
+                        principalTable: "divisiones_geograficas",
                         principalColumn: "id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "producto_sintomas",
+                name: "CarritoItems",
                 columns: table => new
                 {
-                    producto_id = table.Column<int>(type: "int(11)", nullable: false),
-                    sintoma_id = table.Column<int>(type: "int(11)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_producto_sintomas", x => new { x.producto_id, x.sintoma_id });
-                    table.ForeignKey(
-                        name: "producto_sintomas_ibfk_1",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "producto_sintomas_ibfk_2",
-                        column: x => x.sintoma_id,
-                        principalTable: "sintomas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                },
-                comment: "Tabla para conectar los productos con sus síntomas.")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "promocion_productos",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    promocion_id = table.Column<int>(type: "int(11)", nullable: false),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true)
+                    UsuarioId = table.Column<int>(type: "int(11)", nullable: false),
+                    ProductoId = table.Column<int>(type: "int", nullable: true),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    FechaAgregado = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.PrimaryKey("PK_CarritoItems", x => x.Id);
                     table.ForeignKey(
-                        name: "promocion_productos_ibfk_1",
-                        column: x => x.promocion_id,
-                        principalTable: "promociones",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "promocion_productos_ibfk_2",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                },
-                comment: "Tabla para aplicar una promoción a productos específicos")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "ProductDetails",
-                columns: table => new
-                {
-                    IdProductDetail = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    DetailTypeId = table.Column<int>(type: "int", nullable: false),
-                    DetailText = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductDetails", x => x.IdProductDetail);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_DetailType_DetailTypeId",
-                        column: x => x.DetailTypeId,
-                        principalTable: "DetailType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "IdProduct",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "carrito_items",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    usuario_id = table.Column<int>(type: "int(11)", nullable: false),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true),
-                    cantidad = table.Column<int>(type: "int(11)", nullable: false),
-                    fecha_agregado = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "current_timestamp()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "carrito_items_ibfk_1",
-                        column: x => x.usuario_id,
+                        name: "FK_CarritoItems_usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "usuarios",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "carrito_items_ibfk_2",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                },
-                comment: "Tabla para el carrito de las compras\r\nA esta tabla se le hace un DELETE limpio cada que se hace una compra, porque son datos temporales y se usa como una mesa de trabajo donde el cliente coloca los productos y luego se deja limpio. Así se evita que se acumule basura y se hagan más lentas las consultas de los productos del carrito de compras por usuario")
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -810,33 +491,6 @@ namespace FarmaPrisa.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "favoritos_usuario",
-                columns: table => new
-                {
-                    usuario_id = table.Column<int>(type: "int(11)", nullable: false),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: false),
-                    fecha_agregado = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "current_timestamp()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => new { x.usuario_id, x.producto_id })
-                        .Annotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                    table.ForeignKey(
-                        name: "favoritos_usuario_ibfk_1",
-                        column: x => x.usuario_id,
-                        principalTable: "usuarios",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "favoritos_usuario_ibfk_2",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                },
-                comment: "Tabla para la gestión de los productos favoritos de los usuarios")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
                 name: "metodos_pago_usuario",
                 columns: table => new
                 {
@@ -864,37 +518,6 @@ namespace FarmaPrisa.Migrations
                         principalColumn: "id");
                 },
                 comment: "Tabla para la gestión de los métodos de pagos con")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
-
-            migrationBuilder.CreateTable(
-                name: "opiniones_productos",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true),
-                    usuario_id = table.Column<int>(type: "int(11)", nullable: false),
-                    calificacion = table.Column<int>(type: "int(11)", nullable: false),
-                    comentario = table.Column<string>(type: "text", nullable: true, collation: "utf8mb4_unicode_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    fecha_opinion = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "current_timestamp()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => x.id);
-                    table.ForeignKey(
-                        name: "opiniones_productos_ibfk_1",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "opiniones_productos_ibfk_2",
-                        column: x => x.usuario_id,
-                        principalTable: "usuarios",
-                        principalColumn: "id");
-                },
-                comment: "Tabla de Opiniones y Valoraciones")
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -1043,106 +666,233 @@ namespace FarmaPrisa.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "horarios_domicilio",
+                name: "Brands",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
+                    IdBrand = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    zona_id = table.Column<int>(type: "int(11)", nullable: false),
-                    dia_semana = table.Column<string>(type: "enum('lunes','martes','miercoles','jueves','viernes','sabado','domingo')", nullable: false, collation: "utf8mb4_unicode_ci")
+                    Name = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    hora_inicio = table.Column<TimeOnly>(type: "time", nullable: false),
-                    hora_cierre = table.Column<TimeOnly>(type: "time", nullable: false)
+                    IdBranch = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.PrimaryKey("PK_Brands", x => x.IdBrand);
                     table.ForeignKey(
-                        name: "horarios_domicilio_ibfk_1",
-                        column: x => x.zona_id,
-                        principalTable: "zonas_domicilio",
-                        principalColumn: "id",
+                        name: "FK_Brands_Branches_IdBranch",
+                        column: x => x.IdBranch,
+                        principalTable: "Branches",
+                        principalColumn: "IdBranch",
                         onDelete: ReferentialAction.Cascade);
-                },
-                comment: "Tabla para gestión de horarios de los domicilio")
+                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "pedidos",
+                name: "categorias",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int(11)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    usuario_id = table.Column<int>(type: "int(11)", nullable: true),
-                    tipo_entrega = table.Column<string>(type: "enum('domicilio','recoger_en_tienda')", nullable: false, collation: "utf8mb4_unicode_ci")
+                    nombre = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    direccion_id = table.Column<int>(type: "int(11)", nullable: true),
-                    sucursal_recogida_id = table.Column<int>(type: "int(11)", nullable: true),
-                    total = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    estado = table.Column<string>(type: "enum('pendiente','procesando','listo_para_recoger','en_camino','entregado','cancelado')", nullable: false, defaultValueSql: "'pendiente'", collation: "utf8mb4_unicode_ci")
+                    descripcion = table.Column<string>(type: "text", nullable: true, collation: "utf8mb4_unicode_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    receta_id = table.Column<int>(type: "int(11)", nullable: true),
-                    subtotal = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    costo_envio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    monto_descuento = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    monto_impuesto = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    fecha_pedido = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "current_timestamp()")
+                    categoria_padre_id = table.Column<int>(type: "int(11)", nullable: true),
+                    IdBranch = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.id);
                     table.ForeignKey(
-                        name: "pedidos_ibfk_1",
-                        column: x => x.usuario_id,
-                        principalTable: "usuarios",
-                        principalColumn: "id");
+                        name: "FK_categorias_Branches_IdBranch",
+                        column: x => x.IdBranch,
+                        principalTable: "Branches",
+                        principalColumn: "IdBranch",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "pedidos_ibfk_2",
-                        column: x => x.direccion_id,
+                        name: "categorias_ibfk_1",
+                        column: x => x.categoria_padre_id,
+                        principalTable: "categorias",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.SetNull);
+                },
+                comment: "Para organizar productos. El campo 'categoria_padre_id' nos permite crear subcategorías.")
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "ZonasDomicilios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Descripcion = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CostoEnvio = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SucursalId = table.Column<int>(type: "int", nullable: false),
+                    EstaActiva = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZonasDomicilios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ZonasDomicilios_Branches_SucursalId",
+                        column: x => x.SucursalId,
+                        principalTable: "Branches",
+                        principalColumn: "IdBranch",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "Pedidos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UsuarioId = table.Column<int>(type: "int(11)", nullable: true),
+                    TipoEntrega = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DireccionId = table.Column<int>(type: "int(11)", nullable: true),
+                    SucursalRecogidaId = table.Column<int>(type: "int", nullable: true),
+                    Total = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Estado = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RecetaId = table.Column<int>(type: "int(11)", nullable: true),
+                    Subtotal = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    CostoEnvio = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MontoDescuento = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MontoImpuesto = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    FechaPedido = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pedidos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pedidos_Branches_SucursalRecogidaId",
+                        column: x => x.SucursalRecogidaId,
+                        principalTable: "Branches",
+                        principalColumn: "IdBranch");
+                    table.ForeignKey(
+                        name: "FK_Pedidos_direcciones_DireccionId",
+                        column: x => x.DireccionId,
                         principalTable: "direcciones",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "pedidos_ibfk_3",
-                        column: x => x.sucursal_recogida_id,
-                        principalTable: "sucursales",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "pedidos_ibfk_4",
-                        column: x => x.receta_id,
+                        name: "FK_Pedidos_recetas_medicas_RecetaId",
+                        column: x => x.RecetaId,
                         principalTable: "recetas_medicas",
                         principalColumn: "id");
-                },
-                comment: "Tabla para guardar los pedidos de los clientes.")
+                    table.ForeignKey(
+                        name: "FK_Pedidos_usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "usuarios",
+                        principalColumn: "id");
+                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
             migrationBuilder.CreateTable(
-                name: "detalles_pedido",
+                name: "Products",
+                columns: table => new
+                {
+                    IdProduct = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BarCode = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CategoryId = table.Column<int>(type: "int(11)", nullable: false),
+                    SupplierId = table.Column<int>(type: "int(11)", nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Language = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.IdProduct);
+                    table.ForeignKey(
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "IdBrand",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_categorias_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "categorias",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_proveedores_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "proveedores",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "promocion_categorias",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int(11)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    pedido_id = table.Column<int>(type: "int(11)", nullable: false),
-                    producto_id = table.Column<int>(type: "int(11)", nullable: true),
-                    cantidad = table.Column<int>(type: "int(11)", nullable: false),
-                    precio_unitario = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false)
+                    promocion_id = table.Column<int>(type: "int(11)", nullable: false),
+                    categoria_id = table.Column<int>(type: "int(11)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.id);
                     table.ForeignKey(
-                        name: "detalles_pedido_ibfk_1",
-                        column: x => x.pedido_id,
-                        principalTable: "pedidos",
-                        principalColumn: "id");
+                        name: "promocion_categorias_ibfk_1",
+                        column: x => x.promocion_id,
+                        principalTable: "promociones",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "detalles_pedido_ibfk_2",
-                        column: x => x.producto_id,
-                        principalTable: "productos",
-                        principalColumn: "id");
+                        name: "promocion_categorias_ibfk_2",
+                        column: x => x.categoria_id,
+                        principalTable: "categorias",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 },
-                comment: "Tabla de cruce para saber qué productos van en cada pedido.")
+                comment: "Tabla para aplicar una promoción a categorías enteras")
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "HorariosDomicilios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ZonaId = table.Column<int>(type: "int", nullable: false),
+                    DiaSemana = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    HoraInicio = table.Column<TimeOnly>(type: "time(6)", nullable: false),
+                    HoraCierre = table.Column<TimeOnly>(type: "time(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HorariosDomicilios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HorariosDomicilios_ZonasDomicilios_ZonaId",
+                        column: x => x.ZonaId,
+                        principalTable: "ZonasDomicilios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -1168,10 +918,281 @@ namespace FarmaPrisa.Migrations
                     table.ForeignKey(
                         name: "transacciones_ibfk_1",
                         column: x => x.pedido_id,
-                        principalTable: "pedidos",
-                        principalColumn: "id");
+                        principalTable: "Pedidos",
+                        principalColumn: "Id");
                 },
                 comment: "Tabla para guardar un registro del pago")
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "DetallesPedidos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PedidoId = table.Column<int>(type: "int", nullable: false),
+                    ProductoId = table.Column<int>(type: "int", nullable: true),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    PrecioUnitario = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetallesPedidos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DetallesPedidos_Pedidos_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "Pedidos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DetallesPedidos_Products_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "InventarioSucursals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ProductoId = table.Column<int>(type: "int", nullable: true),
+                    SucursalId = table.Column<int>(type: "int", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    stock_minimo = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InventarioSucursals", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InventarioSucursals_Branches_SucursalId",
+                        column: x => x.SucursalId,
+                        principalTable: "Branches",
+                        principalColumn: "IdBranch",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InventarioSucursals_Products_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "Inventories",
+                columns: table => new
+                {
+                    IdInventory = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IdProduct = table.Column<int>(type: "int", nullable: false),
+                    IdProvider = table.Column<int>(type: "int(11)", nullable: false),
+                    IdBranch = table.Column<int>(type: "int", nullable: false),
+                    DateIn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventories", x => x.IdInventory);
+                    table.ForeignKey(
+                        name: "FK_Inventories_Branches_IdBranch",
+                        column: x => x.IdBranch,
+                        principalTable: "Branches",
+                        principalColumn: "IdBranch",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventories_Products_IdProduct",
+                        column: x => x.IdProduct,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventories_proveedores_IdProvider",
+                        column: x => x.IdProvider,
+                        principalTable: "proveedores",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "OpinionesProductos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    producto_id = table.Column<int>(type: "int", nullable: true),
+                    UsuarioId = table.Column<int>(type: "int(11)", nullable: false),
+                    Calificacion = table.Column<int>(type: "int", nullable: false),
+                    Comentario = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FechaOpinion = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ProductoIdProduct = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OpinionesProductos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OpinionesProductos_Products_ProductoIdProduct",
+                        column: x => x.ProductoIdProduct,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OpinionesProductos_usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "usuarios",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "ProductDetails",
+                columns: table => new
+                {
+                    IdProductDetail = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    DetailTypeId = table.Column<int>(type: "int", nullable: false),
+                    DetailText = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TipoDetalleId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductDetails", x => x.IdProductDetail);
+                    table.ForeignKey(
+                        name: "FK_ProductDetails_DetailType_DetailTypeId",
+                        column: x => x.DetailTypeId,
+                        principalTable: "DetailType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductDetails_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductDetails_tipo_detalles_TipoDetalleId",
+                        column: x => x.TipoDetalleId,
+                        principalTable: "tipo_detalles",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "producto_imagenes",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int(11)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    producto_id = table.Column<int>(type: "int(11)", nullable: false),
+                    url_imagen = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false, collation: "utf8mb4_unicode_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    orden = table.Column<int>(type: "int(11)", nullable: false),
+                    es_principal = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.ForeignKey(
+                        name: "producto_imagenes_ibfk_1",
+                        column: x => x.producto_id,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "ProductoSintomas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ProductoId = table.Column<int>(type: "int", nullable: true),
+                    SintomaId = table.Column<int>(type: "int(11)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductoSintomas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductoSintomas_Products_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct");
+                    table.ForeignKey(
+                        name: "FK_ProductoSintomas_sintomas_SintomaId",
+                        column: x => x.SintomaId,
+                        principalTable: "sintomas",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "PromocionProductos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PromocionId = table.Column<int>(type: "int(11)", nullable: false),
+                    ProductoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PromocionProductos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PromocionProductos_Products_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "Products",
+                        principalColumn: "IdProduct");
+                    table.ForeignKey(
+                        name: "FK_PromocionProductos_promociones_PromocionId",
+                        column: x => x.PromocionId,
+                        principalTable: "promociones",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
+
+            migrationBuilder.CreateTable(
+                name: "InventoryDetail",
+                columns: table => new
+                {
+                    IdInventoryDetail = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IdInventory = table.Column<int>(type: "int", nullable: false),
+                    MinQty = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MaxQty = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ReceivedQty = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InventoryDetail", x => x.IdInventoryDetail);
+                    table.ForeignKey(
+                        name: "FK_InventoryDetail_Inventories_IdInventory",
+                        column: x => x.IdInventory,
+                        principalTable: "Inventories",
+                        principalColumn: "IdInventory",
+                        onDelete: ReferentialAction.Cascade);
+                })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_unicode_ci");
 
@@ -1182,14 +1203,24 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "producto_id",
-                table: "carrito_items",
-                column: "producto_id");
+                name: "IX_Branches_DivisionesGeograficaId",
+                table: "Branches",
+                column: "DivisionesGeograficaId");
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id",
-                table: "carrito_items",
-                column: "usuario_id");
+                name: "IX_Branches_IdCompany",
+                table: "Branches",
+                column: "IdCompany");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Brands_IdBranch",
+                table: "Brands",
+                column: "IdBranch");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarritoItems_UsuarioId",
+                table: "CarritoItems",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "categoria_padre_id",
@@ -1197,14 +1228,29 @@ namespace FarmaPrisa.Migrations
                 column: "categoria_padre_id");
 
             migrationBuilder.CreateIndex(
-                name: "pedido_id",
-                table: "detalles_pedido",
-                column: "pedido_id");
+                name: "IX_categorias_IdBranch",
+                table: "categorias",
+                column: "IdBranch");
 
             migrationBuilder.CreateIndex(
-                name: "producto_id1",
-                table: "detalles_pedido",
-                column: "producto_id");
+                name: "IX_Companies_IdCountry",
+                table: "Companies",
+                column: "IdCountry");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Companies_IdCurrency",
+                table: "Companies",
+                column: "IdCurrency");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetallesPedidos_PedidoId",
+                table: "DetallesPedidos",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetallesPedidos_ProductoId",
+                table: "DetallesPedidos",
+                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
                 name: "ciudad_id",
@@ -1212,7 +1258,7 @@ namespace FarmaPrisa.Migrations
                 column: "ciudad_id");
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id1",
+                name: "usuario_id",
                 table: "direcciones",
                 column: "usuario_id");
 
@@ -1222,29 +1268,39 @@ namespace FarmaPrisa.Migrations
                 column: "division_padre_id");
 
             migrationBuilder.CreateIndex(
-                name: "producto_id2",
-                table: "favoritos_usuario",
-                column: "producto_id");
+                name: "IX_HorariosDomicilios_ZonaId",
+                table: "HorariosDomicilios",
+                column: "ZonaId");
 
             migrationBuilder.CreateIndex(
-                name: "zona_id",
-                table: "horarios_domicilio",
-                column: "zona_id");
+                name: "IX_InventarioSucursals_ProductoId",
+                table: "InventarioSucursals",
+                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
-                name: "sucursal_id",
-                table: "horarios_sucursal",
-                column: "sucursal_id");
+                name: "IX_InventarioSucursals_SucursalId",
+                table: "InventarioSucursals",
+                column: "SucursalId");
 
             migrationBuilder.CreateIndex(
-                name: "producto_id3",
-                table: "inventario_sucursal",
-                column: "producto_id");
+                name: "IX_Inventories_IdBranch",
+                table: "Inventories",
+                column: "IdBranch");
 
             migrationBuilder.CreateIndex(
-                name: "sucursal_id1",
-                table: "inventario_sucursal",
-                column: "sucursal_id");
+                name: "IX_Inventories_IdProduct",
+                table: "Inventories",
+                column: "IdProduct");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventories_IdProvider",
+                table: "Inventories",
+                column: "IdProvider");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryDetail_IdInventory",
+                table: "InventoryDetail",
+                column: "IdInventory");
 
             migrationBuilder.CreateIndex(
                 name: "seccion_id",
@@ -1258,19 +1314,19 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id2",
+                name: "usuario_id1",
                 table: "metodos_pago_usuario",
                 column: "usuario_id");
 
             migrationBuilder.CreateIndex(
-                name: "producto_id4",
-                table: "opiniones_productos",
-                column: "producto_id");
+                name: "IX_OpinionesProductos_ProductoIdProduct",
+                table: "OpinionesProductos",
+                column: "ProductoIdProduct");
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id3",
-                table: "opiniones_productos",
-                column: "usuario_id");
+                name: "IX_OpinionesProductos_UsuarioId",
+                table: "OpinionesProductos",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_otps_usuario_usuario_id",
@@ -1289,24 +1345,24 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "direccion_id",
-                table: "pedidos",
-                column: "direccion_id");
+                name: "IX_Pedidos_DireccionId",
+                table: "Pedidos",
+                column: "DireccionId");
 
             migrationBuilder.CreateIndex(
-                name: "receta_id",
-                table: "pedidos",
-                column: "receta_id");
+                name: "IX_Pedidos_RecetaId",
+                table: "Pedidos",
+                column: "RecetaId");
 
             migrationBuilder.CreateIndex(
-                name: "sucursal_recogida_id",
-                table: "pedidos",
-                column: "sucursal_recogida_id");
+                name: "IX_Pedidos_SucursalRecogidaId",
+                table: "Pedidos",
+                column: "SucursalRecogidaId");
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id4",
-                table: "pedidos",
-                column: "usuario_id");
+                name: "IX_Pedidos_UsuarioId",
+                table: "Pedidos",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductDetails_DetailTypeId",
@@ -1319,14 +1375,9 @@ namespace FarmaPrisa.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_producto_detalle_producto_id",
-                table: "producto_detalle",
-                column: "producto_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_producto_detalle_tipo_detalle_id",
-                table: "producto_detalle",
-                column: "tipo_detalle_id");
+                name: "IX_ProductDetails_TipoDetalleId",
+                table: "ProductDetails",
+                column: "TipoDetalleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_producto_imagenes_producto_id",
@@ -1334,36 +1385,14 @@ namespace FarmaPrisa.Migrations
                 column: "producto_id");
 
             migrationBuilder.CreateIndex(
-                name: "producto_id5",
-                table: "producto_sintomas",
-                column: "producto_id");
+                name: "IX_ProductoSintomas_ProductoId",
+                table: "ProductoSintomas",
+                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
-                name: "sintoma_id",
-                table: "producto_sintomas",
-                column: "sintoma_id");
-
-            migrationBuilder.CreateIndex(
-                name: "categoria_id",
-                table: "productos",
-                column: "categoria_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_productos_sku",
-                table: "productos",
-                column: "sku",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "proveedor_id",
-                table: "productos",
-                column: "proveedor_id");
-
-            migrationBuilder.CreateIndex(
-                name: "sku",
-                table: "productos",
-                column: "sku",
-                unique: true);
+                name: "IX_ProductoSintomas_SintomaId",
+                table: "ProductoSintomas",
+                column: "SintomaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -1381,7 +1410,7 @@ namespace FarmaPrisa.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "categoria_id1",
+                name: "categoria_id",
                 table: "promocion_categorias",
                 column: "categoria_id");
 
@@ -1391,20 +1420,20 @@ namespace FarmaPrisa.Migrations
                 column: "promocion_id");
 
             migrationBuilder.CreateIndex(
-                name: "producto_id6",
-                table: "promocion_productos",
-                column: "producto_id");
-
-            migrationBuilder.CreateIndex(
-                name: "promocion_id1",
-                table: "promocion_productos",
-                column: "promocion_id");
-
-            migrationBuilder.CreateIndex(
                 name: "codigo_cupon",
                 table: "promociones",
                 column: "codigo_cupon",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PromocionProductos_ProductoId",
+                table: "PromocionProductos",
+                column: "ProductoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PromocionProductos_PromocionId",
+                table: "PromocionProductos",
+                column: "PromocionId");
 
             migrationBuilder.CreateIndex(
                 name: "nombre1",
@@ -1413,7 +1442,7 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id5",
+                name: "usuario_id2",
                 table: "recetas_medicas",
                 column: "usuario_id");
 
@@ -1436,11 +1465,6 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ciudad_id1",
-                table: "sucursales",
-                column: "ciudad_id");
-
-            migrationBuilder.CreateIndex(
                 name: "pais_id",
                 table: "tasas_impuestos",
                 column: "pais_id");
@@ -1452,7 +1476,7 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "pedido_id1",
+                name: "pedido_id",
                 table: "transacciones",
                 column: "pedido_id");
 
@@ -1462,7 +1486,7 @@ namespace FarmaPrisa.Migrations
                 column: "aseguradora_id");
 
             migrationBuilder.CreateIndex(
-                name: "usuario_id6",
+                name: "usuario_id3",
                 table: "usuario_aseguradoras",
                 column: "usuario_id");
 
@@ -1489,7 +1513,7 @@ namespace FarmaPrisa.Migrations
                 column: "pais_id");
 
             migrationBuilder.CreateIndex(
-                name: "proveedor_id1",
+                name: "proveedor_id",
                 table: "usuarios",
                 column: "proveedor_id");
 
@@ -1500,31 +1524,28 @@ namespace FarmaPrisa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "sucursal_id2",
-                table: "zonas_domicilio",
-                column: "sucursal_id");
+                name: "IX_ZonasDomicilios_SucursalId",
+                table: "ZonasDomicilios",
+                column: "SucursalId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "carrito_items");
+                name: "CarritoItems");
 
             migrationBuilder.DropTable(
-                name: "detalles_pedido");
+                name: "DetallesPedidos");
 
             migrationBuilder.DropTable(
-                name: "favoritos_usuario");
+                name: "HorariosDomicilios");
 
             migrationBuilder.DropTable(
-                name: "horarios_domicilio");
+                name: "InventarioSucursals");
 
             migrationBuilder.DropTable(
-                name: "horarios_sucursal");
-
-            migrationBuilder.DropTable(
-                name: "inventario_sucursal");
+                name: "InventoryDetail");
 
             migrationBuilder.DropTable(
                 name: "items_media");
@@ -1533,7 +1554,7 @@ namespace FarmaPrisa.Migrations
                 name: "metodos_pago_usuario");
 
             migrationBuilder.DropTable(
-                name: "opiniones_productos");
+                name: "OpinionesProductos");
 
             migrationBuilder.DropTable(
                 name: "otps_usuario");
@@ -1548,19 +1569,16 @@ namespace FarmaPrisa.Migrations
                 name: "ProductDetails");
 
             migrationBuilder.DropTable(
-                name: "producto_detalle");
-
-            migrationBuilder.DropTable(
                 name: "producto_imagenes");
 
             migrationBuilder.DropTable(
-                name: "producto_sintomas");
+                name: "ProductoSintomas");
 
             migrationBuilder.DropTable(
                 name: "promocion_categorias");
 
             migrationBuilder.DropTable(
-                name: "promocion_productos");
+                name: "PromocionProductos");
 
             migrationBuilder.DropTable(
                 name: "tasas_impuestos");
@@ -1575,16 +1593,16 @@ namespace FarmaPrisa.Migrations
                 name: "usuario_roles");
 
             migrationBuilder.DropTable(
-                name: "zonas_domicilio");
+                name: "ZonasDomicilios");
+
+            migrationBuilder.DropTable(
+                name: "Inventories");
 
             migrationBuilder.DropTable(
                 name: "secciones_media");
 
             migrationBuilder.DropTable(
                 name: "DetailType");
-
-            migrationBuilder.DropTable(
-                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "tipo_detalles");
@@ -1596,10 +1614,7 @@ namespace FarmaPrisa.Migrations
                 name: "promociones");
 
             migrationBuilder.DropTable(
-                name: "productos");
-
-            migrationBuilder.DropTable(
-                name: "pedidos");
+                name: "Pedidos");
 
             migrationBuilder.DropTable(
                 name: "aseguradoras");
@@ -1608,25 +1623,34 @@ namespace FarmaPrisa.Migrations
                 name: "roles");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "direcciones");
+
+            migrationBuilder.DropTable(
+                name: "recetas_medicas");
+
+            migrationBuilder.DropTable(
                 name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "categorias");
 
             migrationBuilder.DropTable(
-                name: "direcciones");
-
-            migrationBuilder.DropTable(
-                name: "sucursales");
-
-            migrationBuilder.DropTable(
-                name: "recetas_medicas");
-
-            migrationBuilder.DropTable(
                 name: "usuarios");
 
             migrationBuilder.DropTable(
+                name: "Branches");
+
+            migrationBuilder.DropTable(
                 name: "proveedores");
+
+            migrationBuilder.DropTable(
+                name: "Companies");
+
+            migrationBuilder.DropTable(
+                name: "Currencys");
 
             migrationBuilder.DropTable(
                 name: "divisiones_geograficas");
