@@ -19,12 +19,12 @@
         //private readonly IProductosService _productosService; // Servicio para gestionar productos
         // Puedes inyectar otros servicios de administración aquí
 
-        //public AdminController(IUsuarioService usuarioService, IPedidoService pedidoService) /*IProductosService productosService*/
-        //{
-        //    _usuarioService = usuarioService;
-        //    _pedidoService = pedidoService;
-        //    //_productosService = productosService;
-        //}
+        public AdminController(IUsuarioService usuarioService /*, IPedidoServicepedidoService*/) /*IProductosService productosService*/
+        {
+            _usuarioService = usuarioService;
+            //_pedidoService = pedidoService;
+            //_productosService = productosService;
+        }
 
         /// <summary>
         /// Devuelve el listado completo de todos los usuarios registrados (activos e inactivos). Solo Administradores.

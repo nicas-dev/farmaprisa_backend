@@ -239,16 +239,6 @@
             </summary>
             
         </member>
-        <member name="M:FarmaPrisa.Controllers.ProductsController.Getbranchcatalogs(System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Lista todos los productos por sucursal, categiorias, marcas.
-            </summary>
-            <param name="branchId"></param>
-            <param name="categoryId"></param>
-            <param name="brandId"></param>
-            <param name="search"></param>
-            <returns></returns>
-        </member>
         <member name="M:FarmaPrisa.Controllers.PromocionController.CreatePromocion(FarmaPrisa.Models.Dtos.Promocion.PromocionCreateDto)">
             <summary>
             Crea una nueva promoción y asigna productos o categorías asociadas. Solo Administradores.
@@ -441,6 +431,30 @@
         <member name="M:FarmaPrisa.Migrations.cambiosentabladetailsinventory.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:FarmaPrisa.Migrations.seeliminoinventariosucursal">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.seeliminoinventariosucursal.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.seeliminoinventariosucursal.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.seeliminoinventariosucursal.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FarmaPrisa.Migrations.implementacionserviciodeinventario">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.implementacionserviciodeinventario.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.implementacionserviciodeinventario.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.implementacionserviciodeinventario.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="P:FarmaPrisa.Models.Dtos.Promocion.PromocionDetalleDto.ProductosAsociadosIds">
             <summary>Lista de IDs de productos a los que aplica la promoción.</summary>
         </member>
@@ -497,11 +511,6 @@
         <member name="T:FarmaPrisa.Models.Entities.HorariosSucursal">
             <summary>
             Tabla para los horarios de las sucursal
-            </summary>
-        </member>
-        <member name="T:FarmaPrisa.Models.Entities.InventarioSucursal">
-            <summary>
-            Tabla para el inventario por sucursal
             </summary>
         </member>
         <member name="T:FarmaPrisa.Models.Entities.ItemsMedium">

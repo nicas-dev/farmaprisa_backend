@@ -11,7 +11,6 @@ namespace FarmaPrisa.Services.Interface
         Task UpdateAsync(ProductDto productDto);
         Task DeleteAsync(int id);
 
-        Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null);
 
     }
 }

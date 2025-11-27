@@ -214,203 +214,79 @@ namespace FarmaPrisa.Repository.Service
             await _context.SaveChangesAsync();
         }
 
-        //public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
-        //{
-        //    // 1. Iniciamos la consulta desde el Inventario de la Sucursal
-        //    var query = _context.Inventories
-        //        .Include(inv => inv.Product)
-        //            .ThenInclude(p => p.Brand)
-        //        .Include(inv => inv.Product)
-        //            .ThenInclude(p => p.Category)
-        //        .Include(inv => inv.Product)
-        //            ///.ThenInclude(p => p.Opi) // Asumiendo que existe esta navegación
-        //        .Where(inv => inv.IdBranch == branchId
-        //                   && inv.IsActive // Asumiendo propiedad para activar/desactivar en sucursal
-        //                   && inv.Product.IsActive == true); // Asumiendo estado global activo
+    
 
-        //    // 2. Aplicamos filtros dinámicos
-        //    if (categoryId.HasValue)
-        //    {
-        //        query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
-        //    }
 
-        //    if (brandId.HasValue)
-        //    {
-        //        query = query.Where(inv => inv.Product.BrandId == brandId.Value);
-        //    }
+        //// metodo para listar productos tomando en cuenta de sucursal
+        // public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
+        // {
+        //     // 1. Iniciamos la consulta
+        //     var query = _context.Inventories
+        //         .Include(inv => inv.Product)
+        //             .ThenInclude(p => p.Brand)
+        //         .Include(inv => inv.Product)
+        //             .ThenInclude(p => p.Category)
+        //         .Include(inv => inv.InventoryDetails) // <--- IMPORTANTE: Incluir detalles para poder sumar stock/precio
+        //         .Where(inv => inv.IdBranch == branchId
+        //                    && inv.IsActive
+        //                    && inv.Product.IsActive == true);
 
-        //    if (!string.IsNullOrEmpty(search))
-        //    {
-        //        query = query.Where(inv => inv.Product.Name.Contains(search)
-        //                                || inv.Product.BarCode.Contains(search));
-        //    }
+        //     // 2. Filtros
+        //     if (categoryId.HasValue)
+        //     {
+        //         query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
+        //     }
 
-        //    // 3. Proyección optimizada (Select)
-        //    var resultados = await query
-        //        .Select(inv => new ProductCardDto
-        //        {
-        //            ProductId = inv.Product.IdProduct,
-        //            Name = inv.Product.Name,
-        //            ImageUrl = inv.Product.Imagenes.FirstOrDefault().UrlImagen ?? "",
-        //            BrandName = inv.Product.Brand.Name,
-        //            CategoryName = inv.Product.Category.Nombre,
+        //     if (brandId.HasValue)
+        //     {
+        //         query = query.Where(inv => inv.Product.BrandId == brandId.Value);
+        //     }
 
-        //            // Datos locales de la sucursal
-        //            //CurrentPrice = inv.InventoryDetails.Price,
-        //            AvailableStock = inv.InventoryDetails.Sum(d => d.stock ),
+        //     if (!string.IsNullOrEmpty(search))
+        //     {
+        //         query = query.Where(inv => inv.Product.Name.Contains(search)
+        //                                 || inv.Product.BarCode.Contains(search));
+        //     }
 
-        //            //// Lógica de negocio
-        //            //IsNew = inv.Product. > DateTime.Now.AddDays(-30),
+        //     // 3. Proyección
+        //     var resultados = await query
+        //         .Select(inv => new ProductCardDto
+        //         {
+        //             ProductId = inv.Product.IdProduct,
+        //             Name = inv.Product.Name,
+        //             // Manejo seguro de imagen (si la lista es null o vacía)
+        //             ImageUrl = inv.Product.Imagenes != null && inv.Product.Imagenes.Any()
+        //                        ? inv.Product.Imagenes.FirstOrDefault().UrlImagen
+        //                        : "",
+        //             BrandName = inv.Product.Brand.Name,
+        //             CategoryName = inv.Product.Category.Nombre,
 
-        //            //// Cálculo de rating (Null check por seguridad)
-        //            //RatingPromedio = inv.Producto.Opiniones.Any()
-        //            //                 ? inv.Producto.Opiniones.Average(o => o.Puntuacion)
-        //            //                 : 0,
-        //            //CantidadReviews = inv.Producto.Opiniones.Count()
-        //        })
-        //        .OrderByDescending(p => p.StockDisponible > 0) // Priorizar disponibles
-        //        .ThenBy(p => p.Nombre)
-        //        .ToListAsync();
+        //             // --- LÓGICA DE INVENTARIO DETALLADO ---
 
-        //    return resultados;
-        //}
+        //             // Sumar stock de todos los detalles (lotes)
+        //             AvailableStock = inv.InventoryDetails.Sum(d => d.stock),
 
-       // metodo para listar productos tomando en cuenta de sucursal
-        public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
-        {
-            // 1. Iniciamos la consulta
-            var query = _context.Inventories
-                .Include(inv => inv.Product)
-                    .ThenInclude(p => p.Brand)
-                .Include(inv => inv.Product)
-                    .ThenInclude(p => p.Category)
-                .Include(inv => inv.InventoryDetails) // <--- IMPORTANTE: Incluir detalles para poder sumar stock/precio
-                .Where(inv => inv.IdBranch == branchId
-                           && inv.IsActive
-                           && inv.Product.IsActive == true);
+        //             // Tomar el precio del primer detalle disponible (o 0 si no hay)
+        //             // Asumiendo que la propiedad en InventoryDetails se llama 'Price' o 'SalePrice'
+        //             CurrentPrice = inv.InventoryDetails
+        //                               .OrderByDescending(d => d.stock) // Priorizamos el precio del lote con más stock
+        //                               .Select(d => d.Price) // <--- Verifica si se llama 'Price' o 'Precio'
+        //                               .FirstOrDefault(),
 
-            // 2. Filtros
-            if (categoryId.HasValue)
-            {
-                query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
-            }
+        //             // --- EXTRAS (Comentados hasta que tengas las propiedades) ---
+        //             // IsNew = inv.Product.CreatedAt > DateTime.Now.AddDays(-30),
+        //             // RatingPromedio = ...
+        //         })
+        //         .OrderByDescending(p => p.AvailableStock > 0) // Mostrar disponibles primero
+        //         .ThenBy(p => p.Name)
+        //         .ToListAsync();
 
-            if (brandId.HasValue)
-            {
-                query = query.Where(inv => inv.Product.BrandId == brandId.Value);
-            }
-
-            if (!string.IsNullOrEmpty(search))
-            {
-                query = query.Where(inv => inv.Product.Name.Contains(search)
-                                        || inv.Product.BarCode.Contains(search));
-            }
-
-            // 3. Proyección
-            var resultados = await query
-                .Select(inv => new ProductCardDto
-                {
-                    ProductId = inv.Product.IdProduct,
-                    Name = inv.Product.Name,
-                    // Manejo seguro de imagen (si la lista es null o vacía)
-                    ImageUrl = inv.Product.Imagenes != null && inv.Product.Imagenes.Any()
-                               ? inv.Product.Imagenes.FirstOrDefault().UrlImagen
-                               : "",
-                    BrandName = inv.Product.Brand.Name,
-                    CategoryName = inv.Product.Category.Nombre,
-
-                    // --- LÓGICA DE INVENTARIO DETALLADO ---
-
-                    // Sumar stock de todos los detalles (lotes)
-                    AvailableStock = inv.InventoryDetails.Sum(d => d.stock),
-
-                    // Tomar el precio del primer detalle disponible (o 0 si no hay)
-                    // Asumiendo que la propiedad en InventoryDetails se llama 'Price' o 'SalePrice'
-                    CurrentPrice = inv.InventoryDetails
-                                      .OrderByDescending(d => d.stock) // Priorizamos el precio del lote con más stock
-                                      .Select(d => d.Price) // <--- Verifica si se llama 'Price' o 'Precio'
-                                      .FirstOrDefault(),
-
-                    // --- EXTRAS (Comentados hasta que tengas las propiedades) ---
-                    // IsNew = inv.Product.CreatedAt > DateTime.Now.AddDays(-30),
-                    // RatingPromedio = ...
-                })
-                .OrderByDescending(p => p.AvailableStock > 0) // Mostrar disponibles primero
-                .ThenBy(p => p.Name)
-                .ToListAsync();
-
-            return resultados;
-        }
+        //     return resultados;
+        // }
 
 
 
-        //public async Task<List<ProductCardDto>> GetProductsByBranchAsync(int branchId, int? categoryId = null, int? brandId = null, string? search = null)
-        //{
-        //    // 1. Iniciamos la consulta
-        //    var query = _context.Inventories
-        //        .Include(inv => inv.Product)
-        //            .ThenInclude(p => p.Brand)
-        //        .Include(inv => inv.Product)
-        //            .ThenInclude(p => p.Category)
-        //        .Include(inv => inv.InventoryDetails) // Importante para sumar stock
-        //        .Where(inv => inv.IdBranch == branchId
-        //                   && inv.IsActive
-        //                   && inv.Product.IsActive == true);
 
-        //    // 2. Filtros
-        //    if (categoryId.HasValue)
-        //    {
-        //        query = query.Where(inv => inv.Product.CategoryId == categoryId.Value);
-        //    }
-
-        //    if (brandId.HasValue)
-        //    {
-        //        query = query.Where(inv => inv.Product.BrandId == brandId.Value);
-        //    }
-
-        //    if (!string.IsNullOrEmpty(search))
-        //    {
-        //        query = query.Where(inv => inv.Product.Name.Contains(search)
-        //                                || inv.Product.BarCode.Contains(search));
-        //    }
-
-        //    // 3. Agrupación y Proyección
-        //    // Agrupamos por Producto para unificar proveedores duplicados
-        //    var resultados = await query
-        //        .GroupBy(inv => inv.Product)
-        //        .Select(g => new ProductCardDto
-        //        {
-        //            ProductId = g.Key.IdProduct,
-        //            Name = g.Key.Name,
-
-        //            // Imagen: Tomamos la primera disponible del producto
-        //            ImageUrl = g.Key.Imagenes != null && g.Key.Imagenes.Any()
-        //                       ? g.Key.Imagenes.FirstOrDefault().UrlImagen
-        //                       : "",
-
-        //            BrandName = g.Key.Brand.Name,
-        //            CategoryName = g.Key.Category.Nombre,
-
-        //            // --- LÓGICA DE INVENTARIO DETALLADO (AGREGADA) ---
-
-        //            // Sumamos el stock de TODOS los inventarios (proveedores) y sus detalles
-        //            AvailableStock = g.Sum(inv => inv.InventoryDetails.Sum(d => d.stock)),
-
-        //            // Precio: Buscamos el precio en todos los detalles de todos los inventarios del grupo
-        //            CurrentPrice = g.SelectMany(inv => inv.InventoryDetails)
-        //                            .OrderByDescending(d => d.stock) // Priorizamos el precio del lote con más stock
-        //                            .Select(d => d.Price)
-        //                            .FirstOrDefault()
-
-        //            // --- EXTRAS ---
-        //            // IsNew = g.Key.CreatedAt > DateTime.Now.AddDays(-30),
-        //        })
-        //        .OrderByDescending(p => p.AvailableStock > 0) // Mostrar disponibles primero
-        //        .ThenBy(p => p.Name)
-        //        .ToListAsync();
-
-        //    return resultados;
-        //}
 
     }
 }

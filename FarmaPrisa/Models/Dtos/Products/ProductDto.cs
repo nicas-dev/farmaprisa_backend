@@ -15,6 +15,8 @@
         public bool IsActive { get; set; }
         public string Language { get; set; }
 
+     
+
         public List<ProductDetailDto> Details { get; set; } = new List<ProductDetailDto>();
 
         public ProductImageDto MainImage { get; set; }     // Imagen principal

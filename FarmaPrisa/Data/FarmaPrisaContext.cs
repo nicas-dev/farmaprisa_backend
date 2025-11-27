@@ -32,7 +32,7 @@ public partial class FarmaPrisaContext : DbContext
 
     public virtual DbSet<HorariosDomicilio> HorariosDomicilios { get; set; }
 
-    public virtual DbSet<InventarioSucursal> InventarioSucursals { get; set; }
+    //public virtual DbSet<InventarioSucursal> InventarioSucursals { get; set; }
 
     public virtual DbSet<ItemsMedium> ItemsMedia { get; set; }
 
@@ -89,12 +89,11 @@ public partial class FarmaPrisaContext : DbContext
     public DbSet<DetailType> DetailType { get; set; }
     public DbSet<Currency> Currencys { get; set; }
     public DbSet<Company> Companies { get; set; }
-
- 
      public DbSet<Branch> Branches { get; set; }
-    public DbSet<Inventory> Inventories { get; set; }
-
-
+    public DbSet<IngresoInventario> IngresosInventario { get; set; }
+    public DbSet<InventarioSucursal> InventariosSucursal { get; set; }
+    public DbSet<Kardex> Kardex { get; set; }
+    public DbSet<TipoMovimiento> TiposMovimiento { get; set; }
 
 
     // Lo eliminamos para que Entity Framework utilice la configuración que ya establecimos en Program.cs, que es la forma correcta y centralizada de manejar la configuración de la base de datos en ASP.NET Core.

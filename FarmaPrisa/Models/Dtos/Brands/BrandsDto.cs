@@ -12,6 +12,9 @@ namespace FarmaPrisa.Models.Dtos.Brands
         [Required, StringLength(150)]
         public string Name { get; set; } = null!;
 
+        //nuevo
+        //public bool IsActive { get; set; }
+
         public virtual ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
     }
 }

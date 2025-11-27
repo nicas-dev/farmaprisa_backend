@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FarmaPrisa.Models.Dtos.Products;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FarmaPrisa.Models.Entities;
-
-/// <summary>
-/// Tabla para el inventario por sucursal
-/// </summary>
-public partial class InventarioSucursal
+namespace FarmaPrisa.Models.Entities
 {
-    [Key]
-    public int Id { get; set; }
+    public class InventarioSucursal
+    {
+        [Key]
+        public int Id { get; set; }
 
-    public int? ProductoId { get; set; }
+        public int ProductoId { get; set; }
+        [ForeignKey("ProductoId")]
+        public Product Producto { get; set; }
 
-    public int SucursalId { get; set; }
+        public int SucursalId { get; set; }
+        [ForeignKey("SucursalId")]
+        public Branch Sucursal { get; set; }
 
-    public int Stock { get; set; }
+        // Suma total de CantidadRestante de todos los ingresos activos
+        public int StockTotal { get; set; }
 
-    [Column("stock_minimo")]
-    public int StockMinimo { get; set; } = 0;
-
-    public virtual Product Producto { get; set; } = null!;
-
-    public virtual Branch Sucursal { get; set; } = null!;
+        public DateTime UltimaActualizacion { get; set; }
+    }
 }

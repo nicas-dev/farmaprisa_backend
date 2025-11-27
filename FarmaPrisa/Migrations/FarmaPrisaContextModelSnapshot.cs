@@ -461,7 +461,7 @@ namespace FarmaPrisa.Migrations
                     b.ToTable("HorariosDomicilios");
                 });
 
-            modelBuilder.Entity("FarmaPrisa.Models.Entities.InventarioSucursal", b =>
+            modelBuilder.Entity("FarmaPrisa.Models.Entities.IngresoInventario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -469,15 +469,27 @@ namespace FarmaPrisa.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ProductoId")
+                    b.Property<int>("CantidadInicial")
                         .HasColumnType("int");
 
-                    b.Property<int>("Stock")
+                    b.Property<int>("CantidadRestante")
                         .HasColumnType("int");
 
-                    b.Property<int>("StockMinimo")
-                        .HasColumnType("int")
-                        .HasColumnName("stock_minimo");
+                    b.Property<decimal>("CostoUnitario")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<DateTime>("FechaIngreso")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaVencimiento")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Lote")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SucursalId")
                         .HasColumnType("int");
@@ -488,7 +500,36 @@ namespace FarmaPrisa.Migrations
 
                     b.HasIndex("SucursalId");
 
-                    b.ToTable("InventarioSucursals");
+                    b.ToTable("IngresosInventario");
+                });
+
+            modelBuilder.Entity("FarmaPrisa.Models.Entities.InventarioSucursal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockTotal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SucursalId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UltimaActualizacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductoId");
+
+                    b.HasIndex("SucursalId");
+
+                    b.ToTable("InventariosSucursal");
                 });
 
             modelBuilder.Entity("FarmaPrisa.Models.Entities.ItemsMedium", b =>
@@ -552,6 +593,57 @@ namespace FarmaPrisa.Migrations
                         {
                             t.HasComment("Para poder guardar los elementos de los archivos medias en las secciones");
                         });
+                });
+
+            modelBuilder.Entity("FarmaPrisa.Models.Entities.Kardex", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CostoUnitario")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Notas")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Referencia")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("SaldoAnterior")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SaldoNuevo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SucursalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoMovimientoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductoId");
+
+                    b.HasIndex("SucursalId");
+
+                    b.HasIndex("TipoMovimientoId");
+
+                    b.ToTable("Kardex");
                 });
 
             modelBuilder.Entity("FarmaPrisa.Models.Entities.MetodosPagoUsuario", b =>
@@ -1361,6 +1453,34 @@ namespace FarmaPrisa.Migrations
                     b.ToTable("tipo_detalles", (string)null);
                 });
 
+            modelBuilder.Entity("FarmaPrisa.Models.Entities.TipoMovimiento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("EsAjuste")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("EsIngreso")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposMovimiento");
+                });
+
             modelBuilder.Entity("FarmaPrisa.Models.Entities.Transaccione", b =>
                 {
                     b.Property<int>("Id")
@@ -1605,96 +1725,6 @@ namespace FarmaPrisa.Migrations
                     b.ToTable("ZonasDomicilios");
                 });
 
-            modelBuilder.Entity("Inventory", b =>
-                {
-                    b.Property<int>("IdInventory")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdInventory"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DateIn")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("IdBranch")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProduct")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProvider")
-                        .HasColumnType("int(11)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("IdInventory");
-
-                    b.HasIndex("IdBranch");
-
-                    b.HasIndex("IdProduct");
-
-                    b.HasIndex("IdProvider");
-
-                    b.ToTable("Inventories");
-                });
-
-            modelBuilder.Entity("InventoryDetail", b =>
-                {
-                    b.Property<int>("IdInventoryDetail")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdInventoryDetail"));
-
-                    b.Property<string>("BatchNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("IdInventory")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<decimal>("MaxQty")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("MinQty")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("stock")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("IdInventoryDetail");
-
-                    b.HasIndex("IdInventory");
-
-                    b.ToTable("InventoryDetail");
-                });
-
             modelBuilder.Entity("Branch", b =>
                 {
                     b.HasOne("FarmaPrisa.Models.Entities.DivisionesGeografica", null)
@@ -1827,11 +1857,32 @@ namespace FarmaPrisa.Migrations
                     b.Navigation("Zona");
                 });
 
+            modelBuilder.Entity("FarmaPrisa.Models.Entities.IngresoInventario", b =>
+                {
+                    b.HasOne("FarmaPrisa.Models.Entities.Product", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Branch", "Sucursal")
+                        .WithMany()
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+
+                    b.Navigation("Sucursal");
+                });
+
             modelBuilder.Entity("FarmaPrisa.Models.Entities.InventarioSucursal", b =>
                 {
                     b.HasOne("FarmaPrisa.Models.Entities.Product", "Producto")
                         .WithMany()
-                        .HasForeignKey("ProductoId");
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Branch", "Sucursal")
                         .WithMany()
@@ -1854,6 +1905,33 @@ namespace FarmaPrisa.Migrations
                         .HasConstraintName("items_media_ibfk_1");
 
                     b.Navigation("Seccion");
+                });
+
+            modelBuilder.Entity("FarmaPrisa.Models.Entities.Kardex", b =>
+                {
+                    b.HasOne("FarmaPrisa.Models.Entities.Product", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Branch", "Sucursal")
+                        .WithMany()
+                        .HasForeignKey("SucursalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FarmaPrisa.Models.Entities.TipoMovimiento", "TipoMovimiento")
+                        .WithMany()
+                        .HasForeignKey("TipoMovimientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+
+                    b.Navigation("Sucursal");
+
+                    b.Navigation("TipoMovimiento");
                 });
 
             modelBuilder.Entity("FarmaPrisa.Models.Entities.MetodosPagoUsuario", b =>
@@ -2146,49 +2224,6 @@ namespace FarmaPrisa.Migrations
                     b.Navigation("Sucursal");
                 });
 
-            modelBuilder.Entity("Inventory", b =>
-                {
-                    b.HasOne("Branch", "Branch")
-                        .WithMany("Inventories")
-                        .HasForeignKey("IdBranch")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FarmaPrisa.Models.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("IdProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FarmaPrisa.Models.Entities.Proveedore", "Provider")
-                        .WithMany()
-                        .HasForeignKey("IdProvider")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Branch");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Provider");
-                });
-
-            modelBuilder.Entity("InventoryDetail", b =>
-                {
-                    b.HasOne("Inventory", "Inventory")
-                        .WithMany("InventoryDetails")
-                        .HasForeignKey("IdInventory")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Inventory");
-                });
-
-            modelBuilder.Entity("Branch", b =>
-                {
-                    b.Navigation("Inventories");
-                });
-
             modelBuilder.Entity("Company", b =>
                 {
                     b.Navigation("Branches");
@@ -2315,11 +2350,6 @@ namespace FarmaPrisa.Migrations
             modelBuilder.Entity("FarmaPrisa.Models.Entities.ZonasDomicilio", b =>
                 {
                     b.Navigation("HorariosDomicilios");
-                });
-
-            modelBuilder.Entity("Inventory", b =>
-                {
-                    b.Navigation("InventoryDetails");
                 });
 #pragma warning restore 612, 618
         }

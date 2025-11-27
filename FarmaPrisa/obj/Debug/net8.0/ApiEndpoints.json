@@ -712,22 +712,6 @@
     ]
   },
   {
-    "ContainingType": "FarmaPrisa.Controllers.InventoryController",
-    "Method": "GetInventoryByBranch",
-    "RelativePath": "branch/{branchId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "branchId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "FarmaPrisa.Controllers.BrandsController",
     "Method": "GetAll",
     "RelativePath": "Brands",
@@ -937,6 +921,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FarmaPrisa.Controllers.InventoryController",
+    "Method": "RegistrarCompra",
+    "RelativePath": "comprar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FarmaPrisa.Models.Dtos.Inventory.CompraDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CurrencyController",
     "Method": "GetAll",
     "RelativePath": "Currency",
@@ -1127,47 +1127,6 @@
   },
   {
     "ContainingType": "FarmaPrisa.Controllers.ProductsController",
-    "Method": "Getbranchcatalogs",
-    "RelativePath": "Products/{branchId}/products",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "branchId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "categoryId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "brandId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "search",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[FarmaPrisa.Models.Dtos.Products.ProductCardDto, FarmaPrisa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "FarmaPrisa.Controllers.ProductsController",
     "Method": "GetById",
     "RelativePath": "Products/{id}",
     "HttpMethod": "GET",
@@ -1282,6 +1241,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FarmaPrisa.Controllers.InventoryController",
+    "Method": "GetStockSucursal",
+    "RelativePath": "stock/{sucursalId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursalId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmaPrisa.Controllers.InventoryController",
+    "Method": "GetProductosPorCategoria",
+    "RelativePath": "stock/{sucursalId}/categoria/{categoriaId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursalId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "categoriaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FarmaPrisa.Controllers.UserController",
     "Method": "GetUsuario",
     "RelativePath": "User/id",
@@ -1378,5 +1374,21 @@
         "StatusCode": 404
       }
     ]
+  },
+  {
+    "ContainingType": "FarmaPrisa.Controllers.InventoryController",
+    "Method": "RegistrarVenta",
+    "RelativePath": "vender",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FarmaPrisa.Models.Dtos.Inventory.VentaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

@@ -33,6 +33,8 @@ builder.Services.AddScoped<IProductRepository, ProductService>();
 builder.Services.AddScoped<IBrandRepository, BrandService>();
 builder.Services.AddScoped<IInventoryRepository, InventoryService>();
 
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();

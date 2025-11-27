@@ -1,22 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\",
+  "WorkspaceRootPath": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\backend_farmaprisa\\farmaprisa_backend\\farmaprisa\\repository\\service\\productservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:repository\\service\\productservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\repository\\service\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:repository\\service\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\backend_farmaprisa\\farmaprisa_backend\\farmaprisa\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\models\\dtos\\producto\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\producto\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\backend_farmaprisa\\farmaprisa_backend\\farmaprisa\\models\\entities\\inventorydetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\entities\\inventorydetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\backend_farmaprisa\\farmaprisa_backend\\farmaprisa\\models\\entities\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\entities\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\models\\dtos\\categoria\\categoriadatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\categoria\\categoriadatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,57 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductService .cs",
-              "DocumentMoniker": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\ProductService .cs",
-              "RelativeDocumentMoniker": "Repository\\Service\\ProductService .cs",
-              "ToolTip": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\ProductService .cs",
-              "RelativeToolTip": "Repository\\Service\\ProductService .cs",
-              "ViewState": "AgIAACcBAAAAAAAAAAAtwD0BAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T23:32:04.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "InventoryDetail.cs",
-              "DocumentMoniker": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Models\\Entities\\InventoryDetail.cs",
-              "RelativeDocumentMoniker": "Models\\Entities\\InventoryDetail.cs",
-              "ToolTip": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Models\\Entities\\InventoryDetail.cs",
-              "RelativeToolTip": "Models\\Entities\\InventoryDetail.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAmwBsAAAAOAAAAAAAAAA==",
+              "Title": "CategoriaDataDto.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T23:05:26.246Z",
+              "WhenOpened": "2025-11-27T22:19:38.783Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Models\\Entities\\Inventory.cs",
-              "RelativeDocumentMoniker": "Models\\Entities\\Inventory.cs",
-              "ToolTip": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Models\\Entities\\Inventory.cs",
-              "RelativeToolTip": "Models\\Entities\\Inventory.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAkwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T23:05:16.933Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Proyectos\\backend_farmaprisa\\farmaprisa_backend\\FarmaPrisa\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "Controllers\\ProductsController.cs",
-              "ViewState": "AgIAANsAAAAAAAAAAAAmwPYAAAAhAAAAAAAAAA==",
+              "Title": "ProductoDto.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Producto\\ProductoDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\Producto\\ProductoDto.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Producto\\ProductoDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\Producto\\ProductoDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T22:51:31.063Z",
+              "WhenOpened": "2025-11-27T22:18:05.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InventoryService.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\InventoryService.cs",
+              "RelativeDocumentMoniker": "Repository\\Service\\InventoryService.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\InventoryService.cs",
+              "RelativeToolTip": "Repository\\Service\\InventoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANoAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T21:38:24.791Z",
               "EditorCaption": ""
             }
           ]
