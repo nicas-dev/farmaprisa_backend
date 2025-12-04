@@ -455,6 +455,18 @@
         <member name="M:FarmaPrisa.Migrations.implementacionserviciodeinventario.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:FarmaPrisa.Migrations.agregarsucursales">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.agregarsucursales.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.agregarsucursales.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FarmaPrisa.Migrations.agregarsucursales.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="P:FarmaPrisa.Models.Dtos.Promocion.PromocionDetalleDto.ProductosAsociadosIds">
             <summary>Lista de IDs de productos a los que aplica la promoción.</summary>
         </member>

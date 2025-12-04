@@ -18,7 +18,13 @@ public class Branch : BaseEntity
     [Required, StringLength(200)]
     public string Address { get; set; } = null!;
 
+    [StringLength(20)]
+    public string? PhoneNumber { get; set; }  // Nuevo campo
+
     public virtual Company Company { get; set; } = null!;
+
+    // Relación con usuarios
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 
     //public virtual ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
 }

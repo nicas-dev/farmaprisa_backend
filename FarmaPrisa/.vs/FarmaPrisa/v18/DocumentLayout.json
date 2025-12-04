@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\repository\\service\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:repository\\service\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\models\\dtos\\producto\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\producto\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\repository\\service\\branchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:repository\\service\\branchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\models\\dtos\\categoria\\categoriadatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\categoria\\categoriadatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\repository\\interface\\ibranchreporsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:repository\\interface\\ibranchreporsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\controllers\\branchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:controllers\\branchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\controllers\\brandscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:controllers\\brandscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\migrations\\20251204211452_agregarsucursales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:migrations\\20251204211452_agregarsucursales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\models\\dtos\\branch\\userbranchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\branch\\userbranchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|c:\\proyectos\\farmaprisa_backend\\farmaprisa\\models\\dtos\\branch\\branchwithusersdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F1BDC8-1574-485C-A637-094261CFE528}|FarmaPrisa.csproj|solutionrelative:models\\dtos\\branch\\branchwithusersdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CategoriaDataDto.cs",
-              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
-              "RelativeDocumentMoniker": "Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
-              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
-              "RelativeToolTip": "Models\\Dtos\\Categoria\\CategoriaDataDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAqAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-27T22:19:38.783Z",
+              "WhenOpened": "2025-12-04T22:15:21.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BrandsController.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Controllers\\BrandsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BrandsController.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Controllers\\BrandsController.cs",
+              "RelativeToolTip": "Controllers\\BrandsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T22:14:39.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BranchController.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Controllers\\BranchController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BranchController.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Controllers\\BranchController.cs",
+              "RelativeToolTip": "Controllers\\BranchController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T22:08:22.832Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ProductoDto.cs",
-              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Producto\\ProductoDto.cs",
-              "RelativeDocumentMoniker": "Models\\Dtos\\Producto\\ProductoDto.cs",
-              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Producto\\ProductoDto.cs",
-              "RelativeToolTip": "Models\\Dtos\\Producto\\ProductoDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "Title": "BranchService.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\BranchService.cs",
+              "RelativeDocumentMoniker": "Repository\\Service\\BranchService.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\BranchService.cs",
+              "RelativeToolTip": "Repository\\Service\\BranchService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwA8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-27T22:18:05.359Z",
+              "WhenOpened": "2025-12-04T19:57:14.84Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InventoryService.cs",
-              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\InventoryService.cs",
-              "RelativeDocumentMoniker": "Repository\\Service\\InventoryService.cs",
-              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Service\\InventoryService.cs",
-              "RelativeToolTip": "Repository\\Service\\InventoryService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAANoAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "IBranchReporsitory.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Interface\\IBranchReporsitory.cs",
+              "RelativeDocumentMoniker": "Repository\\Interface\\IBranchReporsitory.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Repository\\Interface\\IBranchReporsitory.cs",
+              "RelativeToolTip": "Repository\\Interface\\IBranchReporsitory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-27T21:38:24.791Z",
+              "WhenOpened": "2025-12-04T19:50:18.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BranchWithUsersDto.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Branch\\BranchWithUsersDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\Branch\\BranchWithUsersDto.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Branch\\BranchWithUsersDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\Branch\\BranchWithUsersDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T20:31:50.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20251204211452_agregarsucursales.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Migrations\\20251204211452_agregarsucursales.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251204211452_agregarsucursales.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Migrations\\20251204211452_agregarsucursales.cs",
+              "RelativeToolTip": "Migrations\\20251204211452_agregarsucursales.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T21:14:53.422Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserBranchDto.cs",
+              "DocumentMoniker": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Branch\\UserBranchDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\Branch\\UserBranchDto.cs",
+              "ToolTip": "C:\\Proyectos\\farmaprisa_backend\\FarmaPrisa\\Models\\Dtos\\Branch\\UserBranchDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\Branch\\UserBranchDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T20:31:38.559Z",
               "EditorCaption": ""
             }
           ]

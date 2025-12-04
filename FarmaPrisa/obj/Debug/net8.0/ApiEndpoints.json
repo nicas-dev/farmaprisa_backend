@@ -712,6 +712,53 @@
     ]
   },
   {
+    "ContainingType": "FarmaPrisa.Controllers.BranchController",
+    "Method": "AssignUserToBranch",
+    "RelativePath": "Branch/{idBranch}/assign-user/{idUsuario}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idBranch",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmaPrisa.Controllers.BranchController",
+    "Method": "GetAll",
+    "RelativePath": "Branch/with-users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmaPrisa.Controllers.BranchController",
+    "Method": "GetById",
+    "RelativePath": "Branch/with-users/{idBranch}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idBranch",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FarmaPrisa.Controllers.BrandsController",
     "Method": "GetAll",
     "RelativePath": "Brands",
@@ -1212,6 +1259,48 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmaPrisa.Controllers.ProductsController",
+    "Method": "DeleteImage",
+    "RelativePath": "Products/delete-image/{productId}/{imageId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "imageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmaPrisa.Controllers.ProductsController",
+    "Method": "SetPrincipalImage",
+    "RelativePath": "Products/set-principal/{productId}/{imageId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "imageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

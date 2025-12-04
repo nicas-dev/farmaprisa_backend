@@ -32,6 +32,8 @@ builder.Services.AddScoped<ICurrencyRepository, CurrencyService>();
 builder.Services.AddScoped<IProductRepository, ProductService>();
 builder.Services.AddScoped<IBrandRepository, BrandService>();
 builder.Services.AddScoped<IInventoryRepository, InventoryService>();
+builder.Services.AddScoped<IBranchReporsitory, BranchService>();
+
 
 
 

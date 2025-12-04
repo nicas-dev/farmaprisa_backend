@@ -221,6 +221,79 @@ namespace FarmaPrisa.Controllers
             });
         }
 
+
+        //Eliminar imagenes
+        [HttpDelete("delete-image/{productId}/{imageId}")]
+        //[Authorize(Roles = "administrador")]
+        public async Task<IActionResult> DeleteImage(int productId, int imageId)
+        {
+            // Buscar la imagen
+            var imagen = await _context.ProductoImagenes
+                                       .FirstOrDefaultAsync(x => x.ProductoId == productId && x.Id == imageId);
+
+            if (imagen == null)
+                return NotFound("La imagen no existe o no pertenece a este producto.");
+
+            // Obtener ruta física del archivo
+            var imageName = Path.GetFileName(imagen.UrlImagen);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", imageName);
+
+            // Eliminar archivo físico si existe
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            // Eliminar registro de BD
+            _context.ProductoImagenes.Remove(imagen);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                success = true,
+                message = "Imagen eliminada.",
+                deletedImage = imageId
+            });
+        }
+
+        //Cambiar imagen principal
+        [HttpPut("set-principal/{productId}/{imageId}")]
+        [Authorize(Roles = "administrador")]
+        public async Task<IActionResult> SetPrincipalImage(int productId, int imageId)
+        {
+            // Obtener todas las imágenes del producto
+            var imagenes = await _context.ProductoImagenes
+                                        .Where(x => x.ProductoId == productId)
+                                        .ToListAsync();
+
+            if (!imagenes.Any())
+                return NotFound("El producto no tiene imágenes registradas.");
+
+            // Buscar la imagen que queremos marcar como principal
+            var imagenPrincipal = imagenes.FirstOrDefault(x => x.Id == imageId);
+
+            if (imagenPrincipal == null)
+                return NotFound("La imagen seleccionada no existe para este producto.");
+
+            // Marcar todas como no principales
+            foreach (var img in imagenes)
+                img.EsPrincipal = false;
+
+            // Marcar la seleccionada como principal
+            imagenPrincipal.EsPrincipal = true;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                success = true,
+                message = "Imagen principal actualizada.",
+                newPrincipal = imageId
+            });
+        }
+
+
+
     }
 
 }
